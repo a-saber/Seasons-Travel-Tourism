@@ -13,7 +13,11 @@ import 'package:seasons/core/resources_manager/assets_manager.dart';
 import 'package:seasons/features/airports/cubit/airports_cubit.dart';
 import 'package:seasons/features/cars/presentation/views/cars_search_view.dart';
 import 'package:seasons/features/flights/presentation/cubit/flights_cubit.dart';
+import 'package:seasons/features/flights/presentation/views/adult_number_view2.dart';
 import 'package:seasons/features/flights/presentation/views/flights_view.dart';
+import 'package:seasons/features/home/cubit/home_cubit.dart';
+import 'package:seasons/features/home/cubit/home_states.dart';
+import 'package:seasons/features/home/data/slider_model.dart';
 import 'package:seasons/features/hotels/presentation/cubit/hotel_cubit/hotel_cubit.dart';
 import 'package:seasons/features/programs_view/presentation/cubit/programs_cubit.dart';
 import 'package:seasons/features/sign_in/presentaion/cubit/login_cubit/login_cubit.dart';
@@ -245,86 +249,145 @@ class HomeBody extends StatelessWidget {
 
         //Expanded(child: Center(child: CarouselSliderDataFound())),
 
-        Expanded(
-          child: ListView.builder(
-            padding: EdgeInsets.zero,
-            itemCount: images2.length,
-            itemBuilder: (context, index)=> Column(
-              children: [
-                SizedBox(
-                  height: 200,
-                  child: Stack(
-                    children: [
-                      CachedNetworkImage(
-                          imageBuilder: (BuildContext, ImageProvider<Object> provider)
+        BlocConsumer<SliderCubit, SliderStates>(
+          listener: (context, state){},
+          builder: (context, state)
+            {
+              if(state is SliderGetLoadingState)
+              {
+                return Expanded(child: Center(child: CircularProgressIndicator(),));
+              }
+              else if (state is SliderGetErrorState)
+              {
+                return Expanded(child: Center(child: Text(state.error, textAlign: TextAlign.center,),));
+              }
+              else if(SliderCubit.get(context).sliders.isEmpty)
+              {
+                return Expanded(child: Center(child: Text('Sorry, there are no offers now\nstay tuned',textAlign: TextAlign.center,),));
+              }
+              else if(state is SliderGetSuccessState)
+              {
+                return Expanded(
+                    child: ListView.builder(
+                        padding: EdgeInsets.zero,
+                        itemCount: SliderCubit.get(context).sliders.length,
+                        itemBuilder: (context, index)=> InkWell(
+                          onTap: ()
                           {
-                            return Container(
-                              decoration: BoxDecoration(
-                                image: DecorationImage(image: provider, fit: BoxFit.fill)
-                              ),
-                            );
+                            switch(SliderCubit.get(context).sliders[index].sliderType)
+                            {
+                              case SliderTypes.flight:
+                              {
+                                Get.to(()=> AdultNumberView2(
+                                  flightModel: SliderCubit.get(context).sliders[index].flightModel,
+                                  fromOffer: true,
+                                  adults: 1,
+                                  infants: 0,
+                                  kids: 0,
+                                ));
+                                break;
+                              }
+                              case SliderTypes.program:
+                              {
+                                break;
+                              }
+                              case SliderTypes.hotel:
+                              {
+                                break;
+                              }
+                              case SliderTypes.car:
+                              {
+                                break;
+                              }
+                              default :
+                              {
+                                break;
+                              }
+                            }
                           },
-                          placeholder: (context, error) =>SizedBox(
-                              height: 120,
-                              child: Center(child: CircularProgressIndicator())),
-                          fit: BoxFit.cover,
-                          errorWidget: (context, url, error) =>
+                          child: Column(
+                            children: [
                               SizedBox(
-                                height: 120,
-                                child: Center(
-                                  child: FaIcon(
-                                      FontAwesomeIcons.image,
-                                      size: 35,
-                                      color: ColorsManager.primaryColor),
+                                height: 200,
+                                child: Stack(
+                                  children: [
+                                    CachedNetworkImage(
+                                        imageBuilder: (BuildContext, ImageProvider<Object> provider)
+                                        {
+                                          return Container(
+                                            decoration: BoxDecoration(
+                                                image: DecorationImage(image: provider, fit: BoxFit.fill)
+                                            ),
+                                          );
+                                        },
+                                        placeholder: (context, error) =>SizedBox(
+                                            height: 120,
+                                            child: Center(child: CircularProgressIndicator())),
+                                        fit: BoxFit.cover,
+                                        errorWidget: (context, url, error) =>
+                                            SizedBox(
+                                              height: 120,
+                                              child: Center(
+                                                child: FaIcon(
+                                                    FontAwesomeIcons.image,
+                                                    size: 35,
+                                                    color: ColorsManager.primaryColor),
+                                              ),
+                                            ),
+
+                                        // const Icon(
+                                        //   Icons.image_outlined,
+                                        //   color: Colors.grey,
+                                        // ),
+                                        imageUrl: 'https://api.seasonsge.com/${SliderCubit.get(context).sliders[index].imagePath!}'),
+                                    Stack(
+                                      alignment: AlignmentDirectional.bottomStart,
+                                      children: [
+                                        Container(
+                                          width: double.infinity,
+                                          decoration: BoxDecoration(
+                                              gradient: LinearGradient(
+                                                  begin: AlignmentDirectional.bottomCenter,
+                                                  end: AlignmentDirectional.center,
+                                                  colors:
+                                                  [
+                                                    Colors.black,
+                                                    Colors.black,
+                                                    Colors.black,
+                                                    Colors.black.withOpacity(0.2),
+                                                    Colors.black.withOpacity(0.2),
+                                                    Colors.black.withOpacity(0.2),
+                                                  ])
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsetsDirectional.only(end: 40, start: 20, bottom: 15),
+                                          child: Text(
+                                            SliderCubit.get(context).sliders[index].text!.capitalize!,
+                                            style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600),),
+                                        ),
+
+                                      ],
+                                    ),
+                                  ],
                                 ),
                               ),
-
-                          // const Icon(
-                          //   Icons.image_outlined,
-                          //   color: Colors.grey,
-                          // ),
-                          imageUrl: images2[index]),
-                      Stack(
-                        alignment: AlignmentDirectional.bottomStart,
-                        children: [
-                          Container(
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: AlignmentDirectional.bottomCenter,
-                                end: AlignmentDirectional.center,
-                                  colors:
-                                  [
-                                    Colors.black,
-                                    Colors.black,
-                                    Colors.black,
-                                    Colors.black.withOpacity(0.2),
-                                    Colors.black.withOpacity(0.2),
-                                    Colors.black.withOpacity(0.2),
-                                  ])
-                            ),
+                              Divider(
+                                height: 0,
+                                color: Colors.white,
+                                thickness: 1.5,
+                              )
+                            ],
                           ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.only(end: 40, start: 20, bottom: 15),
-                            child: Text(
-                              'earth wind and fire experience by 2pac - hell'
-                                  .capitalize!,
-                              style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600),),
-                          ),
-
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                Divider(
-                  height: 0,
-                  color: Colors.white,
-                  thickness: 1.5,
-                )
-              ],
-            )
-          )
+                        )
+                    )
+                );
+              }
+              else
+              {
+                return SizedBox();
+              }
+            },
         ),
       ],
     );

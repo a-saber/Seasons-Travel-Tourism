@@ -79,49 +79,7 @@ class _MainHomeViewState extends State<MainHomeView> {
         var cubit = HomeCubit.get(context);
         return Scaffold(
             body: cubit.screens[cubit.currentIndex],
-            // SafeArea(
-            //     child: SizedBox(
-            //       height: double.infinity,
-            //       child: Stack(
-            //         alignment: Alignment.topCenter,
-            //         children: [
-            //           cubit.screens[cubit.currentIndex],
-            //           Align(
-            //             alignment: Alignment.bottomCenter,
-            //             child: Directionality(
-            //               textDirection: TextDirection.ltr,
-            //               child: Padding(
-            //                 padding: EdgeInsets.only(right: 20, left: 20, bottom: 20),
-            //                 child: Material(
-            //                   color: Color(0x66ffffff),
-            //                   elevation: 5,
-            //                   borderRadius: BorderRadius.circular(23),
-            //                   child: Container(
-            //                     decoration: BoxDecoration(
-            //                       color: Color(0xffffffff),
-            //                       borderRadius: BorderRadius.circular(15)
-            //                     ),
-            //                     height: 50,
-            //                     width: double.infinity,
-            //                     padding: EdgeInsets.symmetric(horizontal: 20),
-            //                     child: Row(
-            //                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //                       children:
-            //                       [
-            //                         BottomNavItemBuilder(index: 0, icon: FontAwesomeIcons.house),
-            //                         BottomNavItemBuilder(index: 1, icon: FontAwesomeIcons.rightToBracket),
-            //                         BottomNavItemBuilder(index: 2, icon: FontAwesomeIcons.magnifyingGlass),
-            //                         BottomNavItemBuilder(index: 3, icon: FontAwesomeIcons.gear),
-            //                       ],
-            //                     ),
-            //                   ),
-            //                 ),
-            //               ),
-            //             ),
-            //           )
-            //         ],
-            //       ),
-            //     )),
+
           bottomNavigationBar:
           Directionality(
           textDirection: TextDirection.ltr,
@@ -324,3 +282,50 @@ bottomNavigationBar: Directionality(
                   label: "More"),
             ],
           ),*/
+
+
+/*
+// SafeArea(
+            //     child: SizedBox(
+            //       height: double.infinity,
+            //       child: Stack(
+            //         alignment: Alignment.topCenter,
+            //         children: [
+            //           cubit.screens[cubit.currentIndex],
+            //           Align(
+            //             alignment: Alignment.bottomCenter,
+            //             child: Directionality(
+            //               textDirection: TextDirection.ltr,
+            //               child: Padding(
+            //                 padding: EdgeInsets.only(right: 20, left: 20, bottom: 20),
+            //                 child: Material(
+            //                   color: Color(0x66ffffff),
+            //                   elevation: 5,
+            //                   borderRadius: BorderRadius.circular(23),
+            //                   child: Container(
+            //                     decoration: BoxDecoration(
+            //                       color: Color(0xffffffff),
+            //                       borderRadius: BorderRadius.circular(15)
+            //                     ),
+            //                     height: 50,
+            //                     width: double.infinity,
+            //                     padding: EdgeInsets.symmetric(horizontal: 20),
+            //                     child: Row(
+            //                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //                       children:
+            //                       [
+            //                         BottomNavItemBuilder(index: 0, icon: FontAwesomeIcons.house),
+            //                         BottomNavItemBuilder(index: 1, icon: FontAwesomeIcons.rightToBracket),
+            //                         BottomNavItemBuilder(index: 2, icon: FontAwesomeIcons.magnifyingGlass),
+            //                         BottomNavItemBuilder(index: 3, icon: FontAwesomeIcons.gear),
+            //                       ],
+            //                     ),
+            //                   ),
+            //                 ),
+            //               ),
+            //             ),
+            //           )
+            //         ],
+            //       ),
+            //     )),
+ */

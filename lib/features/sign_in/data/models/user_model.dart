@@ -18,6 +18,20 @@ class LoginResponse {
     return data;
   }
 }
+
+class DeleteUserResponse {
+  bool? status;
+  String? message;
+
+  DeleteUserResponse({this.status, this.message});
+
+  DeleteUserResponse.fromJson(Map<String, dynamic> json) {
+    status = json['status'];
+    message = json['message'];
+  }
+
+}
+
 class RegisterResponse {
   bool? success;
   String? message;

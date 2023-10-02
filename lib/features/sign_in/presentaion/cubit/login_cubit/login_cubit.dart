@@ -52,6 +52,30 @@ class LoginCubit extends Cubit<LoginStates> {
     });
   }
 
+  Future<void> userDelete(context) async
+  {
+    emit(DeleteUserLoadingState());
+    var result = await loginRepoImplementation.deleteUser(
+        userId: userModel!.id.toString());
+    result.fold((failure) {
+      print("errrrrrrrrrrrrror");
+      print(failure.errorMessage.toString());
+      emit(DeleteUserErrorState(failure.errorMessage));
+      showToast(massage: failure.errorMessage, state: ToastState.ERROR);
+    }, (deleteResponse) async{
+        showToast(massage: "Deleted Successfully", state: ToastState.SUCCESS);
+        userModel = null;
+        CacheData.password = null;
+        CacheData.email = null;
+        await CacheHelper.removeData(key: 'email');
+        await CacheHelper.removeData(key: 'password');
+        HomeCubit.get(context).Logout();
+        emit(DeleteUserSuccessState());
+    });
+  }
+
+
+
   File? registerImage;
   Future<void> register({
     required UserModel user,

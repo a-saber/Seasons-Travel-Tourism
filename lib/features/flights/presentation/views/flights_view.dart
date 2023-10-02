@@ -158,979 +158,998 @@ class _FlightsState extends State<FlightsView> {
                 padding: const EdgeInsets.only(top: 20.0, bottom: 20),
                 child: Column(
                   children: [
-                    InkWell(
-                        onTap: ()
-                        {
-                          // if(fromAirport !=null)
-                          // {
-                          //   search.text =  CacheData.lang == CacheHelperKeys.keyEN? fromAirport!.englishName! :fromAirport!.arabicName!;
-                          // }
-                          // else
-                            search.text='';
-                          scaffoldKey.currentState!.showBottomSheet(
-                              backgroundColor: Colors.transparent, (context) {
-                            return BottomSheetBody(
-                              fromAirport: fromAirport,
-                              isSearch: isSearch,
-                              search: search,
-                              onTap: (model)
-                              {
-                                fromAirport = model;
-                                Navigator.pop(context);
-                                setState(() {});
-                              },
-                            );
-                            // return Stack(
-                            //   alignment: Alignment.bottomCenter,
-                            //   children: [
-                            //     InkWell(
-                            //       onTap: () {
-                            //         Navigator.pop(context);
-                            //       },
-                            //       child: Container(
-                            //         width: double.infinity,
-                            //         height: MediaQuery.of(context).size.height,
-                            //         color: Colors.black.withOpacity(0.5),
-                            //       ),
-                            //     ),
-                            //     Container(
-                            //       width: double.infinity,
-                            //       height: MediaQuery.of(context).size.height * 0.65,
-                            //       decoration: BoxDecoration(
-                            //           //color: Colors.white,
-                            //           color: Theme.of(context).scaffoldBackgroundColor,
-                            //           borderRadius: BorderRadius.only(
-                            //             topRight: Radius.circular(20),
-                            //             topLeft: Radius.circular(20),
-                            //           )),
-                            //       padding: EdgeInsets.symmetric(
-                            //           vertical: 20),
-                            //       child: Column(
-                            //         crossAxisAlignment: CrossAxisAlignment.start,
+                    Stack(
+                      alignment: AlignmentDirectional.centerEnd,
+                      children: [
+                        Column(
+                          children: [
+                            InkWell(
+                                onTap: ()
+                                {
+                                  // if(fromAirport !=null)
+                                  // {
+                                  //   search.text =  CacheData.lang == CacheHelperKeys.keyEN? fromAirport!.englishName! :fromAirport!.arabicName!;
+                                  // }
+                                  // else
+                                    search.text='';
+                                  scaffoldKey.currentState!.showBottomSheet(
+                                      backgroundColor: Colors.transparent, (context) {
+                                    return BottomSheetBody(
+                                      fromAirport: fromAirport,
+                                      isSearch: isSearch,
+                                      search: search,
+                                      onTap: (model)
+                                      {
+                                        fromAirport = model;
+                                        Navigator.pop(context);
+                                        setState(() {});
+                                      },
+                                    );
+                                    // return Stack(
+                                    //   alignment: Alignment.bottomCenter,
+                                    //   children: [
+                                    //     InkWell(
+                                    //       onTap: () {
+                                    //         Navigator.pop(context);
+                                    //       },
+                                    //       child: Container(
+                                    //         width: double.infinity,
+                                    //         height: MediaQuery.of(context).size.height,
+                                    //         color: Colors.black.withOpacity(0.5),
+                                    //       ),
+                                    //     ),
+                                    //     Container(
+                                    //       width: double.infinity,
+                                    //       height: MediaQuery.of(context).size.height * 0.65,
+                                    //       decoration: BoxDecoration(
+                                    //           //color: Colors.white,
+                                    //           color: Theme.of(context).scaffoldBackgroundColor,
+                                    //           borderRadius: BorderRadius.only(
+                                    //             topRight: Radius.circular(20),
+                                    //             topLeft: Radius.circular(20),
+                                    //           )),
+                                    //       padding: EdgeInsets.symmetric(
+                                    //           vertical: 20),
+                                    //       child: Column(
+                                    //         crossAxisAlignment: CrossAxisAlignment.start,
+                                    //         children: [
+                                    //           DefaultField(
+                                    //             onChange: (String val) {
+                                    //               if (val.isEmpty)
+                                    //               {
+                                    //                 isSearch = false;
+                                    //               }
+                                    //               else
+                                    //               {
+                                    //                 isSearch = true;
+                                    //               }
+                                    //               AirportsCubit.get(context).filter(name: val);
+                                    //             },
+                                    //             controller: search,
+                                    //             hint: TranslationKeyManager.search.tr,
+                                    //             prefix: Padding(
+                                    //               padding: EdgeInsets.symmetric(horizontal: 15),
+                                    //               child: FaIcon(
+                                    //                 FontAwesomeIcons.magnifyingGlass,
+                                    //                 color: ColorsManager.iconColor,
+                                    //                 size: 20,
+                                    //               )
+                                    //             ),
+                                    //
+                                    //           ),
+                                    //           // TextFormField(
+                                    //           //   onChanged: (String val) {
+                                    //           //     if (val.isEmpty)
+                                    //           //     {
+                                    //           //       isSearch = false;
+                                    //           //     }
+                                    //           //     else
+                                    //           //     {
+                                    //           //       isSearch = true;
+                                    //           //     }
+                                    //           //     AirportsCubit.get(context).filter(name: val);
+                                    //           //   },
+                                    //           //   controller: search,
+                                    //           //   style: TextStyle(
+                                    //           //       color: Colors.white,
+                                    //           //       fontWeight: FontWeight.w600),
+                                    //           //   decoration: InputDecoration(
+                                    //           //       hintText: TranslationKeyManager.search.tr,
+                                    //           //       filled: true,
+                                    //           //       fillColor: Colors.black.withOpacity(0.5),
+                                    //           //       prefixIcon: Icon(
+                                    //           //         Icons.location_pin,
+                                    //           //         size: 18,
+                                    //           //       ),
+                                    //           //       prefixIconColor: Colors.white,
+                                    //           //       hintStyle: TextStyle(
+                                    //           //           color: Colors.grey.withOpacity(0.8),
+                                    //           //           fontWeight: FontWeight.w600),
+                                    //           //       enabledBorder: OutlineInputBorder(
+                                    //           //           borderRadius: BorderRadius.circular(3),
+                                    //           //           borderSide: BorderSide(
+                                    //           //               color: Colors.transparent)),
+                                    //           //       focusedBorder: OutlineInputBorder(
+                                    //           //           borderRadius: BorderRadius.circular(3),
+                                    //           //           borderSide: BorderSide(
+                                    //           //             color: Colors.transparent,
+                                    //           //           )),
+                                    //           //       contentPadding: const EdgeInsets.symmetric(
+                                    //           //           horizontal: 10, vertical: 10)),
+                                    //           // ),
+                                    //           SizedBox(
+                                    //             height: 20,
+                                    //           ),
+                                    //           BlocConsumer<AirportsCubit, AirportsStates>(
+                                    //               listener: (context, state) {},
+                                    //               builder: (context, state)
+                                    //               {
+                                    //                 if (state is AirportsGetLoadingState ||
+                                    //                     state is AirportsFilterLoadingState)
+                                    //                 {
+                                    //                   return Column(
+                                    //                     mainAxisAlignment: MainAxisAlignment.center,
+                                    //                     children: [
+                                    //                       SizedBox(
+                                    //                           height: 30,
+                                    //                           width: 30,
+                                    //                           child: CircularProgressIndicator()),
+                                    //                     ],
+                                    //                   );
+                                    //                 }
+                                    //                 else if (state is AirportsGetErrorState)
+                                    //                 {
+                                    //                   return Column(
+                                    //                     mainAxisAlignment: MainAxisAlignment.center,
+                                    //                     children: [
+                                    //                       Text(state.error),
+                                    //                     ],
+                                    //                   );
+                                    //                 }
+                                    //                 else if (state is AirportsFilterErrorState)
+                                    //                 {
+                                    //                   return Column(
+                                    //                     mainAxisAlignment: MainAxisAlignment.center,
+                                    //                     children: [
+                                    //                       Text(state.error),
+                                    //                     ],
+                                    //                   );
+                                    //                 }
+                                    //                 else if ((fromAirport == null || search.text.isEmpty) && !isSearch)
+                                    //                 {
+                                    //                   // show all
+                                    //                   return Expanded(
+                                    //                     child: Column(
+                                    //                       children: [
+                                    //                         Container(
+                                    //                           padding: EdgeInsets.symmetric(horizontal: 30),
+                                    //                           width: double.infinity,
+                                    //                           color: Colors.grey.withOpacity(0.2),
+                                    //                           child: Text(
+                                    //                             TranslationKeyManager.allAirports.tr,
+                                    //                             style: TextStyle(
+                                    //                                 color: Colors.grey,
+                                    //                                 fontWeight: FontWeight.bold),
+                                    //                           ),
+                                    //                         ),
+                                    //                         SizedBox(
+                                    //                           height: 15,
+                                    //                         ),
+                                    //                         Expanded(
+                                    //                           child: ListView.builder(
+                                    //                               itemCount: AirportsCubit.get(context)
+                                    //                                   .airportsResponse!
+                                    //                                   .data!
+                                    //                                   .length,
+                                    //                               itemBuilder: (context, index) => Padding(
+                                    //                                 padding: const EdgeInsets.symmetric(
+                                    //                                     horizontal: 30.0,vertical: 7),
+                                    //                                 child: InkWell(
+                                    //                                   onTap: () {
+                                    //                                     fromAirport =
+                                    //                                     AirportsCubit.get(context)
+                                    //                                         .airportsResponse!
+                                    //                                         .data![index];
+                                    //                                     Navigator.pop(context);
+                                    //                                     setState(() {});
+                                    //                                   },
+                                    //                                   child: Column(
+                                    //                                     crossAxisAlignment:
+                                    //                                     CrossAxisAlignment.start,
+                                    //                                     children: [
+                                    //                                       Row(
+                                    //                                         mainAxisAlignment:
+                                    //                                         MainAxisAlignment.start,
+                                    //                                         crossAxisAlignment:
+                                    //                                         CrossAxisAlignment.center,
+                                    //                                         children: [
+                                    //                                           Transform.rotate(
+                                    //                                               angle: pi * 0.2,
+                                    //                                               child: Icon(
+                                    //                                                   Icons
+                                    //                                                       .airplanemode_on_sharp,
+                                    //                                                   size: 20,
+                                    //                                                   color: Colors.grey)),
+                                    //                                           SizedBox(
+                                    //                                             width: 10,
+                                    //                                           ),
+                                    //                                           Text(
+                                    //                                             CacheData.lang == CacheHelperKeys.keyEN?
+                                    //                                             AirportsCubit.get(context).airportsResponse!.data![index].englishName!:
+                                    //                                             AirportsCubit.get(context).airportsResponse!.data![index].arabicName!,
+                                    //                                             style: TextStyle(
+                                    //                                                 fontWeight:
+                                    //                                                 FontWeight.bold,
+                                    //                                                 color: Colors.black),
+                                    //                                             maxLines: 1,
+                                    //                                             overflow:
+                                    //                                             TextOverflow.ellipsis,
+                                    //                                           ),
+                                    //                                         ],
+                                    //                                       ),
+                                    //                                       Divider()
+                                    //                                     ],
+                                    //                                   ),
+                                    //                                 ),
+                                    //                               )),
+                                    //                         ),
+                                    //                       ],
+                                    //                     ),
+                                    //                   );
+                                    //                 }
+                                    //                 else
+                                    //                 {
+                                    //                   // show filtered
+                                    //                   return Expanded(
+                                    //                     child: Column(
+                                    //                       children: [
+                                    //                         Container(
+                                    //                           padding: EdgeInsets.symmetric(horizontal: 30),
+                                    //                           width: double.infinity,
+                                    //                           color: Colors.grey.withOpacity(0.2),
+                                    //                           child: Text(
+                                    //                             TranslationKeyManager.results.tr,
+                                    //                             style: TextStyle(
+                                    //                                 color: Colors.grey,
+                                    //                                 fontWeight: FontWeight.bold),
+                                    //                           ),
+                                    //                         ),
+                                    //                         SizedBox(
+                                    //                           height: 15,
+                                    //                         ),
+                                    //                         Expanded(
+                                    //                           child: ListView.builder(
+                                    //                               itemCount: AirportsCubit.get(context)
+                                    //                                   .airPortsFiltered
+                                    //                                   .length,
+                                    //                               itemBuilder: (context, index) => Padding(
+                                    //                                 padding: const EdgeInsets.symmetric(
+                                    //                                     horizontal: 30.0, vertical: 7),
+                                    //                                 child: InkWell(
+                                    //                                   onTap: () {
+                                    //                                     fromAirport =
+                                    //                                     AirportsCubit.get(context)
+                                    //                                         .airPortsFiltered[index];
+                                    //                                     Navigator.pop(context);
+                                    //                                     setState(() {});
+                                    //                                   },
+                                    //                                   child: Column(
+                                    //                                     crossAxisAlignment:
+                                    //                                     CrossAxisAlignment.start,
+                                    //                                     children: [
+                                    //                                       Row(
+                                    //                                         mainAxisAlignment:
+                                    //                                         MainAxisAlignment.start,
+                                    //                                         crossAxisAlignment:
+                                    //                                         CrossAxisAlignment.center,
+                                    //                                         children: [
+                                    //                                           Transform.rotate(
+                                    //                                               angle: pi * 0.2,
+                                    //                                               child: Icon(
+                                    //                                                   Icons
+                                    //                                                       .airplanemode_on_sharp,
+                                    //                                                   size: 20,
+                                    //                                                   color: Colors.grey)),
+                                    //                                           SizedBox(
+                                    //                                             width: 10,
+                                    //                                           ),
+                                    //                                           Text(
+                                    //                                             CacheData.lang == CacheHelperKeys.keyEN?
+                                    //                                             AirportsCubit.get(context).airPortsFiltered[index].englishName!:
+                                    //                                             AirportsCubit.get(context).airPortsFiltered[index].arabicName!,
+                                    //                                             style: TextStyle(
+                                    //                                                 fontWeight:
+                                    //                                                 FontWeight.bold,
+                                    //                                                 color: Colors.black),
+                                    //                                           ),
+                                    //                                         ],
+                                    //                                       ),
+                                    //                                       Divider()
+                                    //                                     ],
+                                    //                                   ),
+                                    //                                 ),
+                                    //                               )),
+                                    //                         ),
+                                    //                       ],
+                                    //                     ),
+                                    //                   );
+                                    //                 }
+                                    //               })
+                                    //         ],
+                                    //       ),
+                                    //     ),
+                                    //   ],
+                                    // );
+                                  });
+                                },
+                                child: DefaultField(
+                                  horizontalPadding: 20,
+                                  prefix:  Padding(
+                                    padding: const EdgeInsetsDirectional.only(start: 10.0, end: 10),
+                                    child: FaIcon(
+                                      FontAwesomeIcons.planeDeparture,
+                                      color: ColorsManager.iconColor,
+                                      size: 20,
+                                    ),
+                                  ),
+                                    enabled: false,
+                                    hint: TranslationKeyManager.whereFrom.tr,
+                                    controller: TextEditingController(
+                                      text: fromAirport != null?
+                                      CacheData.lang == CacheHelperKeys.keyEN ?
+                                      fromAirport!.englishName!:
+                                      fromAirport!.arabicName! :
+                                      ''
+                                    ))),
+                            SizedBox(height: 15,),
+                            // InkWell(
+                            //   onTap: ()
+                            //   {
+                            //     if(fromAirport !=null)
+                            //     {
+                            //       search.text =  CacheData.lang == CacheHelperKeys.keyEN? fromAirport!.englishName! :fromAirport!.arabicName!;
+                            //     }
+                            //     else
+                            //       search.text='';
+                            //     scaffoldKey.currentState!.showBottomSheet(
+                            //         backgroundColor: Colors.transparent, (context) {
+                            //       return Stack(
+                            //         alignment: Alignment.bottomCenter,
                             //         children: [
-                            //           DefaultField(
-                            //             onChange: (String val) {
-                            //               if (val.isEmpty)
-                            //               {
-                            //                 isSearch = false;
-                            //               }
-                            //               else
-                            //               {
-                            //                 isSearch = true;
-                            //               }
-                            //               AirportsCubit.get(context).filter(name: val);
+                            //           InkWell(
+                            //             onTap: () {
+                            //               Navigator.pop(context);
                             //             },
-                            //             controller: search,
-                            //             hint: TranslationKeyManager.search.tr,
-                            //             prefix: Padding(
-                            //               padding: EdgeInsets.symmetric(horizontal: 15),
-                            //               child: FaIcon(
-                            //                 FontAwesomeIcons.magnifyingGlass,
-                            //                 color: ColorsManager.iconColor,
-                            //                 size: 20,
-                            //               )
+                            //             child: Container(
+                            //               width: double.infinity,
+                            //               height: MediaQuery.of(context).size.height,
+                            //               color: Colors.black.withOpacity(0.5),
                             //             ),
-                            //
                             //           ),
-                            //           // TextFormField(
-                            //           //   onChanged: (String val) {
-                            //           //     if (val.isEmpty)
-                            //           //     {
-                            //           //       isSearch = false;
-                            //           //     }
-                            //           //     else
-                            //           //     {
-                            //           //       isSearch = true;
-                            //           //     }
-                            //           //     AirportsCubit.get(context).filter(name: val);
-                            //           //   },
-                            //           //   controller: search,
-                            //           //   style: TextStyle(
-                            //           //       color: Colors.white,
-                            //           //       fontWeight: FontWeight.w600),
-                            //           //   decoration: InputDecoration(
-                            //           //       hintText: TranslationKeyManager.search.tr,
-                            //           //       filled: true,
-                            //           //       fillColor: Colors.black.withOpacity(0.5),
-                            //           //       prefixIcon: Icon(
-                            //           //         Icons.location_pin,
-                            //           //         size: 18,
-                            //           //       ),
-                            //           //       prefixIconColor: Colors.white,
-                            //           //       hintStyle: TextStyle(
-                            //           //           color: Colors.grey.withOpacity(0.8),
-                            //           //           fontWeight: FontWeight.w600),
-                            //           //       enabledBorder: OutlineInputBorder(
-                            //           //           borderRadius: BorderRadius.circular(3),
-                            //           //           borderSide: BorderSide(
-                            //           //               color: Colors.transparent)),
-                            //           //       focusedBorder: OutlineInputBorder(
-                            //           //           borderRadius: BorderRadius.circular(3),
-                            //           //           borderSide: BorderSide(
-                            //           //             color: Colors.transparent,
-                            //           //           )),
-                            //           //       contentPadding: const EdgeInsets.symmetric(
-                            //           //           horizontal: 10, vertical: 10)),
-                            //           // ),
-                            //           SizedBox(
-                            //             height: 20,
-                            //           ),
-                            //           BlocConsumer<AirportsCubit, AirportsStates>(
-                            //               listener: (context, state) {},
-                            //               builder: (context, state)
-                            //               {
-                            //                 if (state is AirportsGetLoadingState ||
-                            //                     state is AirportsFilterLoadingState)
-                            //                 {
-                            //                   return Column(
-                            //                     mainAxisAlignment: MainAxisAlignment.center,
-                            //                     children: [
-                            //                       SizedBox(
-                            //                           height: 30,
-                            //                           width: 30,
-                            //                           child: CircularProgressIndicator()),
-                            //                     ],
-                            //                   );
-                            //                 }
-                            //                 else if (state is AirportsGetErrorState)
-                            //                 {
-                            //                   return Column(
-                            //                     mainAxisAlignment: MainAxisAlignment.center,
-                            //                     children: [
-                            //                       Text(state.error),
-                            //                     ],
-                            //                   );
-                            //                 }
-                            //                 else if (state is AirportsFilterErrorState)
-                            //                 {
-                            //                   return Column(
-                            //                     mainAxisAlignment: MainAxisAlignment.center,
-                            //                     children: [
-                            //                       Text(state.error),
-                            //                     ],
-                            //                   );
-                            //                 }
-                            //                 else if ((fromAirport == null || search.text.isEmpty) && !isSearch)
-                            //                 {
-                            //                   // show all
-                            //                   return Expanded(
-                            //                     child: Column(
-                            //                       children: [
-                            //                         Container(
-                            //                           padding: EdgeInsets.symmetric(horizontal: 30),
-                            //                           width: double.infinity,
-                            //                           color: Colors.grey.withOpacity(0.2),
-                            //                           child: Text(
-                            //                             TranslationKeyManager.allAirports.tr,
-                            //                             style: TextStyle(
-                            //                                 color: Colors.grey,
-                            //                                 fontWeight: FontWeight.bold),
-                            //                           ),
-                            //                         ),
-                            //                         SizedBox(
-                            //                           height: 15,
-                            //                         ),
-                            //                         Expanded(
-                            //                           child: ListView.builder(
-                            //                               itemCount: AirportsCubit.get(context)
-                            //                                   .airportsResponse!
-                            //                                   .data!
-                            //                                   .length,
-                            //                               itemBuilder: (context, index) => Padding(
-                            //                                 padding: const EdgeInsets.symmetric(
-                            //                                     horizontal: 30.0,vertical: 7),
-                            //                                 child: InkWell(
-                            //                                   onTap: () {
-                            //                                     fromAirport =
-                            //                                     AirportsCubit.get(context)
-                            //                                         .airportsResponse!
-                            //                                         .data![index];
-                            //                                     Navigator.pop(context);
-                            //                                     setState(() {});
-                            //                                   },
-                            //                                   child: Column(
-                            //                                     crossAxisAlignment:
-                            //                                     CrossAxisAlignment.start,
-                            //                                     children: [
-                            //                                       Row(
-                            //                                         mainAxisAlignment:
-                            //                                         MainAxisAlignment.start,
-                            //                                         crossAxisAlignment:
-                            //                                         CrossAxisAlignment.center,
-                            //                                         children: [
-                            //                                           Transform.rotate(
-                            //                                               angle: pi * 0.2,
-                            //                                               child: Icon(
-                            //                                                   Icons
-                            //                                                       .airplanemode_on_sharp,
-                            //                                                   size: 20,
-                            //                                                   color: Colors.grey)),
-                            //                                           SizedBox(
-                            //                                             width: 10,
-                            //                                           ),
-                            //                                           Text(
-                            //                                             CacheData.lang == CacheHelperKeys.keyEN?
-                            //                                             AirportsCubit.get(context).airportsResponse!.data![index].englishName!:
-                            //                                             AirportsCubit.get(context).airportsResponse!.data![index].arabicName!,
-                            //                                             style: TextStyle(
-                            //                                                 fontWeight:
-                            //                                                 FontWeight.bold,
-                            //                                                 color: Colors.black),
-                            //                                             maxLines: 1,
-                            //                                             overflow:
-                            //                                             TextOverflow.ellipsis,
-                            //                                           ),
-                            //                                         ],
-                            //                                       ),
-                            //                                       Divider()
-                            //                                     ],
-                            //                                   ),
-                            //                                 ),
-                            //                               )),
-                            //                         ),
-                            //                       ],
-                            //                     ),
-                            //                   );
-                            //                 }
-                            //                 else
-                            //                 {
-                            //                   // show filtered
-                            //                   return Expanded(
-                            //                     child: Column(
-                            //                       children: [
-                            //                         Container(
-                            //                           padding: EdgeInsets.symmetric(horizontal: 30),
-                            //                           width: double.infinity,
-                            //                           color: Colors.grey.withOpacity(0.2),
-                            //                           child: Text(
-                            //                             TranslationKeyManager.results.tr,
-                            //                             style: TextStyle(
-                            //                                 color: Colors.grey,
-                            //                                 fontWeight: FontWeight.bold),
-                            //                           ),
-                            //                         ),
-                            //                         SizedBox(
-                            //                           height: 15,
-                            //                         ),
-                            //                         Expanded(
-                            //                           child: ListView.builder(
-                            //                               itemCount: AirportsCubit.get(context)
-                            //                                   .airPortsFiltered
-                            //                                   .length,
-                            //                               itemBuilder: (context, index) => Padding(
-                            //                                 padding: const EdgeInsets.symmetric(
-                            //                                     horizontal: 30.0, vertical: 7),
-                            //                                 child: InkWell(
-                            //                                   onTap: () {
-                            //                                     fromAirport =
-                            //                                     AirportsCubit.get(context)
-                            //                                         .airPortsFiltered[index];
-                            //                                     Navigator.pop(context);
-                            //                                     setState(() {});
-                            //                                   },
-                            //                                   child: Column(
-                            //                                     crossAxisAlignment:
-                            //                                     CrossAxisAlignment.start,
-                            //                                     children: [
-                            //                                       Row(
-                            //                                         mainAxisAlignment:
-                            //                                         MainAxisAlignment.start,
-                            //                                         crossAxisAlignment:
-                            //                                         CrossAxisAlignment.center,
-                            //                                         children: [
-                            //                                           Transform.rotate(
-                            //                                               angle: pi * 0.2,
-                            //                                               child: Icon(
-                            //                                                   Icons
-                            //                                                       .airplanemode_on_sharp,
-                            //                                                   size: 20,
-                            //                                                   color: Colors.grey)),
-                            //                                           SizedBox(
-                            //                                             width: 10,
-                            //                                           ),
-                            //                                           Text(
-                            //                                             CacheData.lang == CacheHelperKeys.keyEN?
-                            //                                             AirportsCubit.get(context).airPortsFiltered[index].englishName!:
-                            //                                             AirportsCubit.get(context).airPortsFiltered[index].arabicName!,
-                            //                                             style: TextStyle(
-                            //                                                 fontWeight:
-                            //                                                 FontWeight.bold,
-                            //                                                 color: Colors.black),
-                            //                                           ),
-                            //                                         ],
-                            //                                       ),
-                            //                                       Divider()
-                            //                                     ],
-                            //                                   ),
-                            //                                 ),
-                            //                               )),
-                            //                         ),
-                            //                       ],
-                            //                     ),
-                            //                   );
-                            //                 }
-                            //               })
-                            //         ],
-                            //       ),
-                            //     ),
-                            //   ],
-                            // );
-                          });
-                        },
-                        child: DefaultField(
-                          horizontalPadding: 20,
-                          prefix:  Padding(
-                            padding: const EdgeInsetsDirectional.only(start: 10.0, end: 10),
-                            child: FaIcon(
-                              FontAwesomeIcons.planeDeparture,
-                              color: ColorsManager.iconColor,
-                              size: 20,
-                            ),
-                          ),
-                            enabled: false,
-                            hint: TranslationKeyManager.whereFrom.tr,
-                            controller: TextEditingController(
-                              text: fromAirport != null?
-                              CacheData.lang == CacheHelperKeys.keyEN ?
-                              fromAirport!.englishName!:
-                              fromAirport!.arabicName! :
-                              ''
-                            ))),
-                    SizedBox(height: 15,),
-                    // InkWell(
-                    //   onTap: ()
-                    //   {
-                    //     if(fromAirport !=null)
-                    //     {
-                    //       search.text =  CacheData.lang == CacheHelperKeys.keyEN? fromAirport!.englishName! :fromAirport!.arabicName!;
-                    //     }
-                    //     else
-                    //       search.text='';
-                    //     scaffoldKey.currentState!.showBottomSheet(
-                    //         backgroundColor: Colors.transparent, (context) {
-                    //       return Stack(
-                    //         alignment: Alignment.bottomCenter,
-                    //         children: [
-                    //           InkWell(
-                    //             onTap: () {
-                    //               Navigator.pop(context);
-                    //             },
-                    //             child: Container(
-                    //               width: double.infinity,
-                    //               height: MediaQuery.of(context).size.height,
-                    //               color: Colors.black.withOpacity(0.5),
-                    //             ),
-                    //           ),
-                    //           Container(
-                    //             width: double.infinity,
-                    //             height: MediaQuery.of(context).size.height * 0.65,
-                    //             decoration: BoxDecoration(
-                    //                 color: Colors.white,
-                    //                 borderRadius: BorderRadius.only(
-                    //                   topRight: Radius.circular(20),
-                    //                   topLeft: Radius.circular(20),
-                    //                 )),
-                    //             padding: EdgeInsets.symmetric(
-                    //                 vertical: 20, horizontal: 20),
-                    //             child: Column(
-                    //               crossAxisAlignment: CrossAxisAlignment.start,
-                    //               children: [
-                    //                 TextFormField(
-                    //                   onChanged: (String val) {
-                    //                     if (val.isEmpty)
-                    //                     {
-                    //                       isSearch = false;
-                    //                     }
-                    //                     else
-                    //                     {
-                    //                       isSearch = true;
-                    //                     }
-                    //                     AirportsCubit.get(context).filter(name: val);
-                    //                   },
-                    //                   controller: search,
-                    //                   style: TextStyle(
-                    //                       color: Colors.white,
-                    //                       fontWeight: FontWeight.w600),
-                    //                   decoration: InputDecoration(
-                    //                       hintText: TranslationKeyManager.search.tr,
-                    //                       filled: true,
-                    //                       fillColor: Colors.black.withOpacity(0.5),
-                    //                       prefixIcon: Icon(
-                    //                         Icons.location_pin,
-                    //                         size: 18,
-                    //                       ),
-                    //                       prefixIconColor: Colors.white,
-                    //                       hintStyle: TextStyle(
-                    //                           color: Colors.grey.withOpacity(0.8),
-                    //                           fontWeight: FontWeight.w600),
-                    //                       enabledBorder: OutlineInputBorder(
-                    //                           borderRadius: BorderRadius.circular(3),
-                    //                           borderSide: BorderSide(
-                    //                               color: Colors.transparent)),
-                    //                       focusedBorder: OutlineInputBorder(
-                    //                           borderRadius: BorderRadius.circular(3),
-                    //                           borderSide: BorderSide(
-                    //                             color: Colors.transparent,
-                    //                           )),
-                    //                       contentPadding: const EdgeInsets.symmetric(
-                    //                           horizontal: 10, vertical: 10)),
-                    //                 ),
-                    //                 SizedBox(
-                    //                   height: 10,
-                    //                 ),
-                    //                 BlocConsumer<AirportsCubit, AirportsStates>(
-                    //                     listener: (context, state) {},
-                    //                     builder: (context, state)
-                    //                     {
-                    //                       if (state is AirportsGetLoadingState ||
-                    //                           state is AirportsFilterLoadingState)
-                    //                       {
-                    //                         return Column(
-                    //                           mainAxisAlignment: MainAxisAlignment.center,
-                    //                           children: [
-                    //                             SizedBox(
-                    //                                 height: 30,
-                    //                                 width: 30,
-                    //                                 child: CircularProgressIndicator()),
-                    //                           ],
-                    //                         );
-                    //                       }
-                    //                       else if (state is AirportsGetErrorState)
-                    //                       {
-                    //                         return Column(
-                    //                           mainAxisAlignment: MainAxisAlignment.center,
-                    //                           children: [
-                    //                             Text(state.error),
-                    //                           ],
-                    //                         );
-                    //                       }
-                    //                       else if (state is AirportsFilterErrorState)
-                    //                       {
-                    //                         return Column(
-                    //                           mainAxisAlignment: MainAxisAlignment.center,
-                    //                           children: [
-                    //                             Text(state.error),
-                    //                           ],
-                    //                         );
-                    //                       }
-                    //                       else if ((fromAirport == null || search.text.isEmpty) && !isSearch)
-                    //                       {
-                    //                         // show all
-                    //                         return Expanded(
-                    //                           child: Column(
-                    //                             children: [
-                    //                               Container(
-                    //                                 padding: EdgeInsets.symmetric(horizontal: 20),
-                    //                                 width: double.infinity,
-                    //                                 color: Colors.grey.withOpacity(0.2),
-                    //                                 child: Text(
-                    //                                   TranslationKeyManager.allAirports.tr,
-                    //                                   style: TextStyle(
-                    //                                       color: Colors.grey,
-                    //                                       fontWeight: FontWeight.bold),
-                    //                                 ),
-                    //                               ),
-                    //                               SizedBox(
-                    //                                 height: 10,
-                    //                               ),
-                    //                               Expanded(
-                    //                                 child: ListView.builder(
-                    //                                     itemCount: AirportsCubit.get(context)
-                    //                                         .airportsResponse!
-                    //                                         .data!
-                    //                                         .length,
-                    //                                     itemBuilder: (context, index) => Padding(
-                    //                                       padding: const EdgeInsets.symmetric(
-                    //                                           horizontal: 20.0,vertical: 5),
-                    //                                       child: InkWell(
-                    //                                         onTap: () {
-                    //                                           fromAirport =
-                    //                                           AirportsCubit.get(context)
-                    //                                               .airportsResponse!
-                    //                                               .data![index];
-                    //                                           Navigator.pop(context);
-                    //                                           setState(() {});
-                    //                                         },
-                    //                                         child: Column(
-                    //                                           crossAxisAlignment:
-                    //                                           CrossAxisAlignment.start,
-                    //                                           children: [
-                    //                                             Row(
-                    //                                               mainAxisAlignment:
-                    //                                               MainAxisAlignment.start,
-                    //                                               crossAxisAlignment:
-                    //                                               CrossAxisAlignment.center,
-                    //                                               children: [
-                    //                                                 Transform.rotate(
-                    //                                                     angle: pi * 0.2,
-                    //                                                     child: Icon(
-                    //                                                         Icons
-                    //                                                             .airplanemode_on_sharp,
-                    //                                                         size: 20,
-                    //                                                         color: Colors.grey)),
-                    //                                                 SizedBox(
-                    //                                                   width: 10,
-                    //                                                 ),
-                    //                                                 Text(
-                    //                                                   CacheData.lang == CacheHelperKeys.keyEN?
-                    //                                                   AirportsCubit.get(context).airportsResponse!.data![index].englishName!:
-                    //                                                   AirportsCubit.get(context).airportsResponse!.data![index].arabicName!,
-                    //                                                   style: TextStyle(
-                    //                                                       fontWeight:
-                    //                                                       FontWeight.bold,
-                    //                                                       color: Colors.black),
-                    //                                                   maxLines: 1,
-                    //                                                   overflow:
-                    //                                                   TextOverflow.ellipsis,
-                    //                                                 ),
-                    //                                               ],
-                    //                                             ),
-                    //                                             Divider()
-                    //                                           ],
-                    //                                         ),
-                    //                                       ),
-                    //                                     )),
-                    //                               ),
-                    //                             ],
-                    //                           ),
-                    //                         );
-                    //                       }
-                    //                       else
-                    //                       {
-                    //                         // show filtered
-                    //                         return Expanded(
-                    //                           child: Column(
-                    //                             children: [
-                    //                               Container(
-                    //                                 padding: EdgeInsets.symmetric(horizontal: 20),
-                    //                                 width: double.infinity,
-                    //                                 color: Colors.grey.withOpacity(0.2),
-                    //                                 child: Text(
-                    //                                   TranslationKeyManager.results.tr,
-                    //                                   style: TextStyle(
-                    //                                       color: Colors.grey,
-                    //                                       fontWeight: FontWeight.bold),
-                    //                                 ),
-                    //                               ),
-                    //                               SizedBox(
-                    //                                 height: 10,
-                    //                               ),
-                    //                               Expanded(
-                    //                                 child: ListView.builder(
-                    //                                     itemCount: AirportsCubit.get(context)
-                    //                                         .airPortsFiltered
-                    //                                         .length,
-                    //                                     itemBuilder: (context, index) => Padding(
-                    //                                       padding: const EdgeInsets.symmetric(
-                    //                                           horizontal: 20.0, vertical: 5),
-                    //                                       child: InkWell(
-                    //                                         onTap: () {
-                    //                                           fromAirport =
-                    //                                           AirportsCubit.get(context)
-                    //                                               .airPortsFiltered[index];
-                    //                                           Navigator.pop(context);
-                    //                                           setState(() {});
-                    //                                         },
-                    //                                         child: Column(
-                    //                                           crossAxisAlignment:
-                    //                                           CrossAxisAlignment.start,
-                    //                                           children: [
-                    //                                             Row(
-                    //                                               mainAxisAlignment:
-                    //                                               MainAxisAlignment.start,
-                    //                                               crossAxisAlignment:
-                    //                                               CrossAxisAlignment.center,
-                    //                                               children: [
-                    //                                                 Transform.rotate(
-                    //                                                     angle: pi * 0.2,
-                    //                                                     child: Icon(
-                    //                                                         Icons
-                    //                                                             .airplanemode_on_sharp,
-                    //                                                         size: 20,
-                    //                                                         color: Colors.grey)),
-                    //                                                 SizedBox(
-                    //                                                   width: 10,
-                    //                                                 ),
-                    //                                                 Text(
-                    //                                                   CacheData.lang == CacheHelperKeys.keyEN?
-                    //                                                   AirportsCubit.get(context).airPortsFiltered[index].englishName!:
-                    //                                                   AirportsCubit.get(context).airPortsFiltered[index].arabicName!,
-                    //                                                   style: TextStyle(
-                    //                                                       fontWeight:
-                    //                                                       FontWeight.bold,
-                    //                                                       color: Colors.black),
-                    //                                                 ),
-                    //                                               ],
-                    //                                             ),
-                    //                                             Divider()
-                    //                                           ],
-                    //                                         ),
-                    //                                       ),
-                    //                                     )),
-                    //                               ),
-                    //                             ],
-                    //                           ),
-                    //                         );
-                    //                       }
-                    //                     })
-                    //               ],
-                    //             ),
-                    //           ),
-                    //         ],
-                    //       );
-                    //     });
-                    //   },
-                    //   child: Container(
-                    //     decoration: BoxDecoration(
-                    //         borderRadius: BorderRadius.circular(5),
-                    //         border: Border.all(
-                    //           color: ColorsManager.iconColor,
-                    //         )),
-                    //     padding:
-                    //     EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                    //     child: Row(
-                    //       children: [
-                    //         Icon(
-                    //           Icons.flight_takeoff,
-                    //           color: ColorsManager.iconColor,
-                    //         ),
-                    //         SizedBox(
-                    //           width: 15,
-                    //         ),
-                    //         Expanded(
-                    //           child: Text(
-                    //             fromAirport != null?
-                    //             CacheData.lang == CacheHelperKeys.keyEN ?
-                    //             fromAirport!.englishName!:
-                    //             fromAirport!.arabicName! :
-                    //             TranslationKeyManager.whereFrom.tr,
-                    //             maxLines: 1,
-                    //             overflow: TextOverflow.ellipsis,
-                    //             style: TextStyle(
-                    //               color: fromAirport == null?
-                    //               Colors.grey:
-                    //               Colors.black,
-                    //               fontSize: 15,
-                    //             ),
-                    //           ),
-                    //         )
-                    //       ],
-                    //     ),
-                    //   ),
-                    // ),
-                    InkWell(
-                        onTap: ()
-                        {
-                          // if(toAirport !=null)
-                          // {
-                          //   search.text =  CacheData.lang == CacheHelperKeys.keyEN? toAirport!.englishName! :toAirport!.arabicName!;
-                          // }
-                          // else
-                            search.text='';
-                          scaffoldKey.currentState!.showBottomSheet(
-                              backgroundColor: Colors.transparent, (context) {
-                            return BottomSheetBody(
-                              fromAirport: toAirport,
-                              isSearch: isSearch,
-                              search: search,
-                              onTap: (model)
-                              {
-                                toAirport = model;
-                                Navigator.pop(context);
-                                setState(() {});
-                              },
-                            );
-                            //  return Stack(
-                            //   alignment: Alignment.bottomCenter,
-                            //   children: [
-                            //     InkWell(
-                            //       onTap: () {
-                            //         Navigator.pop(context);
-                            //       },
-                            //       child: Container(
-                            //         width: double.infinity,
-                            //         height: MediaQuery.of(context).size.height,
-                            //         color: Colors.black.withOpacity(0.5),
-                            //       ),
-                            //     ),
-                            //     Container(
-                            //       width: double.infinity,
-                            //       height: MediaQuery.of(context).size.height * 0.65,
-                            //       decoration: BoxDecoration(
-                            //         color: Colors.white,
-                            //           borderRadius: BorderRadius.only(
-                            //             topRight: Radius.circular(20),
-                            //             topLeft: Radius.circular(20),
-                            //           )),
-                            //       padding: EdgeInsets.symmetric(
-                            //           vertical: 20, horizontal: 20),
-                            //       child: Column(
-                            //         crossAxisAlignment: CrossAxisAlignment.start,
-                            //         children: [
-                            //           TextFormField(
-                            //             onChanged: (String val) {
-                            //               if (val.isEmpty)
-                            //               {
-                            //                 isSearch = false;
-                            //               }
-                            //               else
-                            //               {
-                            //                 isSearch = true;
-                            //               }
-                            //               AirportsCubit.get(context).filter(name: val);
-                            //             },
-                            //             controller: search,
-                            //             style: TextStyle(
+                            //           Container(
+                            //             width: double.infinity,
+                            //             height: MediaQuery.of(context).size.height * 0.65,
+                            //             decoration: BoxDecoration(
                             //                 color: Colors.white,
-                            //                 fontWeight: FontWeight.w600),
-                            //             decoration: InputDecoration(
-                            //                 hintText: TranslationKeyManager.search.tr,
-                            //                 filled: true,
-                            //                 fillColor: Colors.black.withOpacity(0.5),
-                            //                 prefixIcon: Icon(
-                            //                   Icons.location_pin,
-                            //                   size: 18,
+                            //                 borderRadius: BorderRadius.only(
+                            //                   topRight: Radius.circular(20),
+                            //                   topLeft: Radius.circular(20),
+                            //                 )),
+                            //             padding: EdgeInsets.symmetric(
+                            //                 vertical: 20, horizontal: 20),
+                            //             child: Column(
+                            //               crossAxisAlignment: CrossAxisAlignment.start,
+                            //               children: [
+                            //                 TextFormField(
+                            //                   onChanged: (String val) {
+                            //                     if (val.isEmpty)
+                            //                     {
+                            //                       isSearch = false;
+                            //                     }
+                            //                     else
+                            //                     {
+                            //                       isSearch = true;
+                            //                     }
+                            //                     AirportsCubit.get(context).filter(name: val);
+                            //                   },
+                            //                   controller: search,
+                            //                   style: TextStyle(
+                            //                       color: Colors.white,
+                            //                       fontWeight: FontWeight.w600),
+                            //                   decoration: InputDecoration(
+                            //                       hintText: TranslationKeyManager.search.tr,
+                            //                       filled: true,
+                            //                       fillColor: Colors.black.withOpacity(0.5),
+                            //                       prefixIcon: Icon(
+                            //                         Icons.location_pin,
+                            //                         size: 18,
+                            //                       ),
+                            //                       prefixIconColor: Colors.white,
+                            //                       hintStyle: TextStyle(
+                            //                           color: Colors.grey.withOpacity(0.8),
+                            //                           fontWeight: FontWeight.w600),
+                            //                       enabledBorder: OutlineInputBorder(
+                            //                           borderRadius: BorderRadius.circular(3),
+                            //                           borderSide: BorderSide(
+                            //                               color: Colors.transparent)),
+                            //                       focusedBorder: OutlineInputBorder(
+                            //                           borderRadius: BorderRadius.circular(3),
+                            //                           borderSide: BorderSide(
+                            //                             color: Colors.transparent,
+                            //                           )),
+                            //                       contentPadding: const EdgeInsets.symmetric(
+                            //                           horizontal: 10, vertical: 10)),
                             //                 ),
-                            //                 prefixIconColor: Colors.white,
-                            //                 hintStyle: TextStyle(
-                            //                     color: Colors.grey.withOpacity(0.8),
-                            //                     fontWeight: FontWeight.w600),
-                            //                 enabledBorder: OutlineInputBorder(
-                            //                     borderRadius: BorderRadius.circular(3),
-                            //                     borderSide: BorderSide(
-                            //                         color: Colors.transparent)),
-                            //                 focusedBorder: OutlineInputBorder(
-                            //                     borderRadius: BorderRadius.circular(3),
-                            //                     borderSide: BorderSide(
-                            //                       color: Colors.transparent,
-                            //                     )),
-                            //                 contentPadding: const EdgeInsets.symmetric(
-                            //                     horizontal: 10, vertical: 10)),
-                            //           ),
-                            //           SizedBox(
-                            //             height: 10,
-                            //           ),
-                            //           BlocConsumer<AirportsCubit, AirportsStates>(
-                            //               listener: (context, state) {},
-                            //               builder: (context, state)
-                            //               {
-                            //                 if (state is AirportsGetLoadingState ||
-                            //                     state is AirportsFilterLoadingState)
-                            //                 {
-                            //                   return Column(
-                            //                     mainAxisAlignment: MainAxisAlignment.center,
-                            //                     children: [
-                            //                       SizedBox(
-                            //                           height: 30,
-                            //                           width: 30,
-                            //                           child: CircularProgressIndicator()),
-                            //                     ],
-                            //                   );
-                            //                 }
-                            //                 else if (state is AirportsGetErrorState)
-                            //                 {
-                            //                   return Column(
-                            //                     mainAxisAlignment: MainAxisAlignment.center,
-                            //                     children: [
-                            //                       Text(state.error),
-                            //                     ],
-                            //                   );
-                            //                 }
-                            //                 else if (state is AirportsFilterErrorState)
-                            //                 {
-                            //                   return Column(
-                            //                     mainAxisAlignment: MainAxisAlignment.center,
-                            //                     children: [
-                            //                       Text(state.error),
-                            //                     ],
-                            //                   );
-                            //                 }
-                            //                 else if ((fromAirport == null || search.text.isEmpty) && !isSearch)
-                            //                 {
-                            //                   // show all
-                            //                   return Expanded(
-                            //                     child: Column(
-                            //                       children: [
-                            //                         Container(
-                            //                           padding: EdgeInsets.symmetric(horizontal: 20),
-                            //                           width: double.infinity,
-                            //                           color: Colors.grey.withOpacity(0.2),
-                            //                           child: Text(
-                            //                             TranslationKeyManager.allAirports.tr,
-                            //                             style: TextStyle(
-                            //                                 color: Colors.grey,
-                            //                                 fontWeight: FontWeight.bold),
-                            //                           ),
-                            //                         ),
-                            //                         SizedBox(
-                            //                           height: 10,
-                            //                         ),
-                            //                         Expanded(
-                            //                           child: ListView.builder(
-                            //                               itemCount: AirportsCubit.get(context)
-                            //                                   .airportsResponse!
-                            //                                   .data!
-                            //                                   .length,
-                            //                               itemBuilder: (context, index) => Padding(
-                            //                                 padding: const EdgeInsets.symmetric(
-                            //                                     horizontal: 20.0,vertical: 5),
-                            //                                 child: InkWell(
-                            //                                   onTap: () {
-                            //                                     toAirport =
-                            //                                     AirportsCubit.get(context)
+                            //                 SizedBox(
+                            //                   height: 10,
+                            //                 ),
+                            //                 BlocConsumer<AirportsCubit, AirportsStates>(
+                            //                     listener: (context, state) {},
+                            //                     builder: (context, state)
+                            //                     {
+                            //                       if (state is AirportsGetLoadingState ||
+                            //                           state is AirportsFilterLoadingState)
+                            //                       {
+                            //                         return Column(
+                            //                           mainAxisAlignment: MainAxisAlignment.center,
+                            //                           children: [
+                            //                             SizedBox(
+                            //                                 height: 30,
+                            //                                 width: 30,
+                            //                                 child: CircularProgressIndicator()),
+                            //                           ],
+                            //                         );
+                            //                       }
+                            //                       else if (state is AirportsGetErrorState)
+                            //                       {
+                            //                         return Column(
+                            //                           mainAxisAlignment: MainAxisAlignment.center,
+                            //                           children: [
+                            //                             Text(state.error),
+                            //                           ],
+                            //                         );
+                            //                       }
+                            //                       else if (state is AirportsFilterErrorState)
+                            //                       {
+                            //                         return Column(
+                            //                           mainAxisAlignment: MainAxisAlignment.center,
+                            //                           children: [
+                            //                             Text(state.error),
+                            //                           ],
+                            //                         );
+                            //                       }
+                            //                       else if ((fromAirport == null || search.text.isEmpty) && !isSearch)
+                            //                       {
+                            //                         // show all
+                            //                         return Expanded(
+                            //                           child: Column(
+                            //                             children: [
+                            //                               Container(
+                            //                                 padding: EdgeInsets.symmetric(horizontal: 20),
+                            //                                 width: double.infinity,
+                            //                                 color: Colors.grey.withOpacity(0.2),
+                            //                                 child: Text(
+                            //                                   TranslationKeyManager.allAirports.tr,
+                            //                                   style: TextStyle(
+                            //                                       color: Colors.grey,
+                            //                                       fontWeight: FontWeight.bold),
+                            //                                 ),
+                            //                               ),
+                            //                               SizedBox(
+                            //                                 height: 10,
+                            //                               ),
+                            //                               Expanded(
+                            //                                 child: ListView.builder(
+                            //                                     itemCount: AirportsCubit.get(context)
                             //                                         .airportsResponse!
-                            //                                         .data![index];
-                            //                                     Navigator.pop(context);
-                            //                                     setState(() {});
-                            //                                   },
-                            //                                   child: Column(
-                            //                                     crossAxisAlignment:
-                            //                                     CrossAxisAlignment.start,
-                            //                                     children: [
-                            //                                       Row(
-                            //                                         mainAxisAlignment:
-                            //                                         MainAxisAlignment.start,
-                            //                                         crossAxisAlignment:
-                            //                                         CrossAxisAlignment.center,
-                            //                                         children: [
-                            //                                           Transform.rotate(
-                            //                                               angle: pi * 0.2,
-                            //                                               child: Icon(
-                            //                                                   Icons
-                            //                                                       .airplanemode_on_sharp,
-                            //                                                   size: 20,
-                            //                                                   color: Colors.grey)),
-                            //                                           SizedBox(
-                            //                                             width: 10,
-                            //                                           ),
-                            //                                           Text(
-                            //                                             CacheData.lang == CacheHelperKeys.keyEN?
-                            //                                             AirportsCubit.get(context).airportsResponse!.data![index].englishName!:
-                            //                                             AirportsCubit.get(context).airportsResponse!.data![index].arabicName!,
-                            //                                             style: TextStyle(
-                            //                                                 fontWeight:
-                            //                                                 FontWeight.bold,
-                            //                                                 color: Colors.black),
-                            //                                             maxLines: 1,
-                            //                                             overflow:
-                            //                                             TextOverflow.ellipsis,
-                            //                                           ),
-                            //                                         ],
+                            //                                         .data!
+                            //                                         .length,
+                            //                                     itemBuilder: (context, index) => Padding(
+                            //                                       padding: const EdgeInsets.symmetric(
+                            //                                           horizontal: 20.0,vertical: 5),
+                            //                                       child: InkWell(
+                            //                                         onTap: () {
+                            //                                           fromAirport =
+                            //                                           AirportsCubit.get(context)
+                            //                                               .airportsResponse!
+                            //                                               .data![index];
+                            //                                           Navigator.pop(context);
+                            //                                           setState(() {});
+                            //                                         },
+                            //                                         child: Column(
+                            //                                           crossAxisAlignment:
+                            //                                           CrossAxisAlignment.start,
+                            //                                           children: [
+                            //                                             Row(
+                            //                                               mainAxisAlignment:
+                            //                                               MainAxisAlignment.start,
+                            //                                               crossAxisAlignment:
+                            //                                               CrossAxisAlignment.center,
+                            //                                               children: [
+                            //                                                 Transform.rotate(
+                            //                                                     angle: pi * 0.2,
+                            //                                                     child: Icon(
+                            //                                                         Icons
+                            //                                                             .airplanemode_on_sharp,
+                            //                                                         size: 20,
+                            //                                                         color: Colors.grey)),
+                            //                                                 SizedBox(
+                            //                                                   width: 10,
+                            //                                                 ),
+                            //                                                 Text(
+                            //                                                   CacheData.lang == CacheHelperKeys.keyEN?
+                            //                                                   AirportsCubit.get(context).airportsResponse!.data![index].englishName!:
+                            //                                                   AirportsCubit.get(context).airportsResponse!.data![index].arabicName!,
+                            //                                                   style: TextStyle(
+                            //                                                       fontWeight:
+                            //                                                       FontWeight.bold,
+                            //                                                       color: Colors.black),
+                            //                                                   maxLines: 1,
+                            //                                                   overflow:
+                            //                                                   TextOverflow.ellipsis,
+                            //                                                 ),
+                            //                                               ],
+                            //                                             ),
+                            //                                             Divider()
+                            //                                           ],
+                            //                                         ),
                             //                                       ),
-                            //                                       Divider()
-                            //                                     ],
-                            //                                   ),
-                            //                                 ),
-                            //                               )),
-                            //                         ),
-                            //                       ],
-                            //                     ),
-                            //                   );
-                            //                 }
-                            //                 else
-                            //                 {
-                            //                   // show filtered
-                            //                   return Expanded(
-                            //                     child: Column(
-                            //                       children: [
-                            //                         Container(
-                            //                           padding: EdgeInsets.symmetric(horizontal: 20),
-                            //                           width: double.infinity,
-                            //                           color: Colors.grey.withOpacity(0.2),
-                            //                           child: Text(
-                            //                             TranslationKeyManager.results.tr,
-                            //                             style: TextStyle(
-                            //                                 color: Colors.grey,
-                            //                                 fontWeight: FontWeight.bold),
+                            //                                     )),
+                            //                               ),
+                            //                             ],
                             //                           ),
-                            //                         ),
-                            //                         SizedBox(
-                            //                           height: 10,
-                            //                         ),
-                            //                         Expanded(
-                            //                           child: ListView.builder(
-                            //                               itemCount: AirportsCubit.get(context)
-                            //                                   .airPortsFiltered
-                            //                                   .length,
-                            //                               itemBuilder: (context, index) => Padding(
-                            //                                 padding: const EdgeInsets.symmetric(
-                            //                                     horizontal: 20.0, vertical: 5),
-                            //                                 child: InkWell(
-                            //                                   onTap: () {
-                            //                                     toAirport =
-                            //                                     AirportsCubit.get(context)
-                            //                                         .airPortsFiltered[index];
-                            //                                     Navigator.pop(context);
-                            //                                     setState(() {});
-                            //                                   },
-                            //                                   child: Column(
-                            //                                     crossAxisAlignment:
-                            //                                     CrossAxisAlignment.start,
-                            //                                     children: [
-                            //                                       Row(
-                            //                                         mainAxisAlignment:
-                            //                                         MainAxisAlignment.start,
-                            //                                         crossAxisAlignment:
-                            //                                         CrossAxisAlignment.center,
-                            //                                         children: [
-                            //                                           Transform.rotate(
-                            //                                               angle: pi * 0.2,
-                            //                                               child: Icon(
-                            //                                                   Icons
-                            //                                                       .airplanemode_on_sharp,
-                            //                                                   size: 20,
-                            //                                                   color: Colors.grey)),
-                            //                                           SizedBox(
-                            //                                             width: 10,
-                            //                                           ),
-                            //                                           Text(
-                            //                                             CacheData.lang == CacheHelperKeys.keyEN?
-                            //                                             AirportsCubit.get(context).airPortsFiltered[index].englishName!:
-                            //                                             AirportsCubit.get(context).airPortsFiltered[index].arabicName!,
-                            //                                             style: TextStyle(
-                            //                                                 fontWeight:
-                            //                                                 FontWeight.bold,
-                            //                                                 color: Colors.black),
-                            //                                           ),
-                            //                                         ],
-                            //                                       ),
-                            //                                       Divider()
-                            //                                     ],
-                            //                                   ),
+                            //                         );
+                            //                       }
+                            //                       else
+                            //                       {
+                            //                         // show filtered
+                            //                         return Expanded(
+                            //                           child: Column(
+                            //                             children: [
+                            //                               Container(
+                            //                                 padding: EdgeInsets.symmetric(horizontal: 20),
+                            //                                 width: double.infinity,
+                            //                                 color: Colors.grey.withOpacity(0.2),
+                            //                                 child: Text(
+                            //                                   TranslationKeyManager.results.tr,
+                            //                                   style: TextStyle(
+                            //                                       color: Colors.grey,
+                            //                                       fontWeight: FontWeight.bold),
                             //                                 ),
-                            //                               )),
-                            //                         ),
-                            //                       ],
-                            //                     ),
-                            //                   );
-                            //                 }
-                            //               })
+                            //                               ),
+                            //                               SizedBox(
+                            //                                 height: 10,
+                            //                               ),
+                            //                               Expanded(
+                            //                                 child: ListView.builder(
+                            //                                     itemCount: AirportsCubit.get(context)
+                            //                                         .airPortsFiltered
+                            //                                         .length,
+                            //                                     itemBuilder: (context, index) => Padding(
+                            //                                       padding: const EdgeInsets.symmetric(
+                            //                                           horizontal: 20.0, vertical: 5),
+                            //                                       child: InkWell(
+                            //                                         onTap: () {
+                            //                                           fromAirport =
+                            //                                           AirportsCubit.get(context)
+                            //                                               .airPortsFiltered[index];
+                            //                                           Navigator.pop(context);
+                            //                                           setState(() {});
+                            //                                         },
+                            //                                         child: Column(
+                            //                                           crossAxisAlignment:
+                            //                                           CrossAxisAlignment.start,
+                            //                                           children: [
+                            //                                             Row(
+                            //                                               mainAxisAlignment:
+                            //                                               MainAxisAlignment.start,
+                            //                                               crossAxisAlignment:
+                            //                                               CrossAxisAlignment.center,
+                            //                                               children: [
+                            //                                                 Transform.rotate(
+                            //                                                     angle: pi * 0.2,
+                            //                                                     child: Icon(
+                            //                                                         Icons
+                            //                                                             .airplanemode_on_sharp,
+                            //                                                         size: 20,
+                            //                                                         color: Colors.grey)),
+                            //                                                 SizedBox(
+                            //                                                   width: 10,
+                            //                                                 ),
+                            //                                                 Text(
+                            //                                                   CacheData.lang == CacheHelperKeys.keyEN?
+                            //                                                   AirportsCubit.get(context).airPortsFiltered[index].englishName!:
+                            //                                                   AirportsCubit.get(context).airPortsFiltered[index].arabicName!,
+                            //                                                   style: TextStyle(
+                            //                                                       fontWeight:
+                            //                                                       FontWeight.bold,
+                            //                                                       color: Colors.black),
+                            //                                                 ),
+                            //                                               ],
+                            //                                             ),
+                            //                                             Divider()
+                            //                                           ],
+                            //                                         ),
+                            //                                       ),
+                            //                                     )),
+                            //                               ),
+                            //                             ],
+                            //                           ),
+                            //                         );
+                            //                       }
+                            //                     })
+                            //               ],
+                            //             ),
+                            //           ),
                             //         ],
-                            //       ),
+                            //       );
+                            //     });
+                            //   },
+                            //   child: Container(
+                            //     decoration: BoxDecoration(
+                            //         borderRadius: BorderRadius.circular(5),
+                            //         border: Border.all(
+                            //           color: ColorsManager.iconColor,
+                            //         )),
+                            //     padding:
+                            //     EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                            //     child: Row(
+                            //       children: [
+                            //         Icon(
+                            //           Icons.flight_takeoff,
+                            //           color: ColorsManager.iconColor,
+                            //         ),
+                            //         SizedBox(
+                            //           width: 15,
+                            //         ),
+                            //         Expanded(
+                            //           child: Text(
+                            //             fromAirport != null?
+                            //             CacheData.lang == CacheHelperKeys.keyEN ?
+                            //             fromAirport!.englishName!:
+                            //             fromAirport!.arabicName! :
+                            //             TranslationKeyManager.whereFrom.tr,
+                            //             maxLines: 1,
+                            //             overflow: TextOverflow.ellipsis,
+                            //             style: TextStyle(
+                            //               color: fromAirport == null?
+                            //               Colors.grey:
+                            //               Colors.black,
+                            //               fontSize: 15,
+                            //             ),
+                            //           ),
+                            //         )
+                            //       ],
                             //     ),
-                            //   ],
-                            // );
-                          });
-                        },
-                        child: DefaultField(
-                            horizontalPadding: 20,
-                            prefix:  Padding(
-                              padding: const EdgeInsetsDirectional.only(start: 10.0, end: 10),
-                              child: FaIcon(
-                                FontAwesomeIcons.planeArrival,
-                                color: ColorsManager.iconColor,
-                                size: 20,
-                              ),
-                            ),
-                            enabled: false,
-                            hint: TranslationKeyManager.whereTo.tr,
-                            controller: TextEditingController(
-                              text: toAirport != null?
-                              CacheData.lang == CacheHelperKeys.keyEN ?
-                              toAirport!.englishName!:
-                              toAirport!.arabicName! :
-                              '',
-                            ))),
+                            //   ),
+                            // ),
+                            InkWell(
+                                onTap: ()
+                                {
+                                  // if(toAirport !=null)
+                                  // {
+                                  //   search.text =  CacheData.lang == CacheHelperKeys.keyEN? toAirport!.englishName! :toAirport!.arabicName!;
+                                  // }
+                                  // else
+                                    search.text='';
+                                  scaffoldKey.currentState!.showBottomSheet(
+                                      backgroundColor: Colors.transparent, (context) {
+                                    return BottomSheetBody(
+                                      fromAirport: toAirport,
+                                      isSearch: isSearch,
+                                      search: search,
+                                      onTap: (model)
+                                      {
+                                        toAirport = model;
+                                        Navigator.pop(context);
+                                        setState(() {});
+                                      },
+                                    );
+                                    //  return Stack(
+                                    //   alignment: Alignment.bottomCenter,
+                                    //   children: [
+                                    //     InkWell(
+                                    //       onTap: () {
+                                    //         Navigator.pop(context);
+                                    //       },
+                                    //       child: Container(
+                                    //         width: double.infinity,
+                                    //         height: MediaQuery.of(context).size.height,
+                                    //         color: Colors.black.withOpacity(0.5),
+                                    //       ),
+                                    //     ),
+                                    //     Container(
+                                    //       width: double.infinity,
+                                    //       height: MediaQuery.of(context).size.height * 0.65,
+                                    //       decoration: BoxDecoration(
+                                    //         color: Colors.white,
+                                    //           borderRadius: BorderRadius.only(
+                                    //             topRight: Radius.circular(20),
+                                    //             topLeft: Radius.circular(20),
+                                    //           )),
+                                    //       padding: EdgeInsets.symmetric(
+                                    //           vertical: 20, horizontal: 20),
+                                    //       child: Column(
+                                    //         crossAxisAlignment: CrossAxisAlignment.start,
+                                    //         children: [
+                                    //           TextFormField(
+                                    //             onChanged: (String val) {
+                                    //               if (val.isEmpty)
+                                    //               {
+                                    //                 isSearch = false;
+                                    //               }
+                                    //               else
+                                    //               {
+                                    //                 isSearch = true;
+                                    //               }
+                                    //               AirportsCubit.get(context).filter(name: val);
+                                    //             },
+                                    //             controller: search,
+                                    //             style: TextStyle(
+                                    //                 color: Colors.white,
+                                    //                 fontWeight: FontWeight.w600),
+                                    //             decoration: InputDecoration(
+                                    //                 hintText: TranslationKeyManager.search.tr,
+                                    //                 filled: true,
+                                    //                 fillColor: Colors.black.withOpacity(0.5),
+                                    //                 prefixIcon: Icon(
+                                    //                   Icons.location_pin,
+                                    //                   size: 18,
+                                    //                 ),
+                                    //                 prefixIconColor: Colors.white,
+                                    //                 hintStyle: TextStyle(
+                                    //                     color: Colors.grey.withOpacity(0.8),
+                                    //                     fontWeight: FontWeight.w600),
+                                    //                 enabledBorder: OutlineInputBorder(
+                                    //                     borderRadius: BorderRadius.circular(3),
+                                    //                     borderSide: BorderSide(
+                                    //                         color: Colors.transparent)),
+                                    //                 focusedBorder: OutlineInputBorder(
+                                    //                     borderRadius: BorderRadius.circular(3),
+                                    //                     borderSide: BorderSide(
+                                    //                       color: Colors.transparent,
+                                    //                     )),
+                                    //                 contentPadding: const EdgeInsets.symmetric(
+                                    //                     horizontal: 10, vertical: 10)),
+                                    //           ),
+                                    //           SizedBox(
+                                    //             height: 10,
+                                    //           ),
+                                    //           BlocConsumer<AirportsCubit, AirportsStates>(
+                                    //               listener: (context, state) {},
+                                    //               builder: (context, state)
+                                    //               {
+                                    //                 if (state is AirportsGetLoadingState ||
+                                    //                     state is AirportsFilterLoadingState)
+                                    //                 {
+                                    //                   return Column(
+                                    //                     mainAxisAlignment: MainAxisAlignment.center,
+                                    //                     children: [
+                                    //                       SizedBox(
+                                    //                           height: 30,
+                                    //                           width: 30,
+                                    //                           child: CircularProgressIndicator()),
+                                    //                     ],
+                                    //                   );
+                                    //                 }
+                                    //                 else if (state is AirportsGetErrorState)
+                                    //                 {
+                                    //                   return Column(
+                                    //                     mainAxisAlignment: MainAxisAlignment.center,
+                                    //                     children: [
+                                    //                       Text(state.error),
+                                    //                     ],
+                                    //                   );
+                                    //                 }
+                                    //                 else if (state is AirportsFilterErrorState)
+                                    //                 {
+                                    //                   return Column(
+                                    //                     mainAxisAlignment: MainAxisAlignment.center,
+                                    //                     children: [
+                                    //                       Text(state.error),
+                                    //                     ],
+                                    //                   );
+                                    //                 }
+                                    //                 else if ((fromAirport == null || search.text.isEmpty) && !isSearch)
+                                    //                 {
+                                    //                   // show all
+                                    //                   return Expanded(
+                                    //                     child: Column(
+                                    //                       children: [
+                                    //                         Container(
+                                    //                           padding: EdgeInsets.symmetric(horizontal: 20),
+                                    //                           width: double.infinity,
+                                    //                           color: Colors.grey.withOpacity(0.2),
+                                    //                           child: Text(
+                                    //                             TranslationKeyManager.allAirports.tr,
+                                    //                             style: TextStyle(
+                                    //                                 color: Colors.grey,
+                                    //                                 fontWeight: FontWeight.bold),
+                                    //                           ),
+                                    //                         ),
+                                    //                         SizedBox(
+                                    //                           height: 10,
+                                    //                         ),
+                                    //                         Expanded(
+                                    //                           child: ListView.builder(
+                                    //                               itemCount: AirportsCubit.get(context)
+                                    //                                   .airportsResponse!
+                                    //                                   .data!
+                                    //                                   .length,
+                                    //                               itemBuilder: (context, index) => Padding(
+                                    //                                 padding: const EdgeInsets.symmetric(
+                                    //                                     horizontal: 20.0,vertical: 5),
+                                    //                                 child: InkWell(
+                                    //                                   onTap: () {
+                                    //                                     toAirport =
+                                    //                                     AirportsCubit.get(context)
+                                    //                                         .airportsResponse!
+                                    //                                         .data![index];
+                                    //                                     Navigator.pop(context);
+                                    //                                     setState(() {});
+                                    //                                   },
+                                    //                                   child: Column(
+                                    //                                     crossAxisAlignment:
+                                    //                                     CrossAxisAlignment.start,
+                                    //                                     children: [
+                                    //                                       Row(
+                                    //                                         mainAxisAlignment:
+                                    //                                         MainAxisAlignment.start,
+                                    //                                         crossAxisAlignment:
+                                    //                                         CrossAxisAlignment.center,
+                                    //                                         children: [
+                                    //                                           Transform.rotate(
+                                    //                                               angle: pi * 0.2,
+                                    //                                               child: Icon(
+                                    //                                                   Icons
+                                    //                                                       .airplanemode_on_sharp,
+                                    //                                                   size: 20,
+                                    //                                                   color: Colors.grey)),
+                                    //                                           SizedBox(
+                                    //                                             width: 10,
+                                    //                                           ),
+                                    //                                           Text(
+                                    //                                             CacheData.lang == CacheHelperKeys.keyEN?
+                                    //                                             AirportsCubit.get(context).airportsResponse!.data![index].englishName!:
+                                    //                                             AirportsCubit.get(context).airportsResponse!.data![index].arabicName!,
+                                    //                                             style: TextStyle(
+                                    //                                                 fontWeight:
+                                    //                                                 FontWeight.bold,
+                                    //                                                 color: Colors.black),
+                                    //                                             maxLines: 1,
+                                    //                                             overflow:
+                                    //                                             TextOverflow.ellipsis,
+                                    //                                           ),
+                                    //                                         ],
+                                    //                                       ),
+                                    //                                       Divider()
+                                    //                                     ],
+                                    //                                   ),
+                                    //                                 ),
+                                    //                               )),
+                                    //                         ),
+                                    //                       ],
+                                    //                     ),
+                                    //                   );
+                                    //                 }
+                                    //                 else
+                                    //                 {
+                                    //                   // show filtered
+                                    //                   return Expanded(
+                                    //                     child: Column(
+                                    //                       children: [
+                                    //                         Container(
+                                    //                           padding: EdgeInsets.symmetric(horizontal: 20),
+                                    //                           width: double.infinity,
+                                    //                           color: Colors.grey.withOpacity(0.2),
+                                    //                           child: Text(
+                                    //                             TranslationKeyManager.results.tr,
+                                    //                             style: TextStyle(
+                                    //                                 color: Colors.grey,
+                                    //                                 fontWeight: FontWeight.bold),
+                                    //                           ),
+                                    //                         ),
+                                    //                         SizedBox(
+                                    //                           height: 10,
+                                    //                         ),
+                                    //                         Expanded(
+                                    //                           child: ListView.builder(
+                                    //                               itemCount: AirportsCubit.get(context)
+                                    //                                   .airPortsFiltered
+                                    //                                   .length,
+                                    //                               itemBuilder: (context, index) => Padding(
+                                    //                                 padding: const EdgeInsets.symmetric(
+                                    //                                     horizontal: 20.0, vertical: 5),
+                                    //                                 child: InkWell(
+                                    //                                   onTap: () {
+                                    //                                     toAirport =
+                                    //                                     AirportsCubit.get(context)
+                                    //                                         .airPortsFiltered[index];
+                                    //                                     Navigator.pop(context);
+                                    //                                     setState(() {});
+                                    //                                   },
+                                    //                                   child: Column(
+                                    //                                     crossAxisAlignment:
+                                    //                                     CrossAxisAlignment.start,
+                                    //                                     children: [
+                                    //                                       Row(
+                                    //                                         mainAxisAlignment:
+                                    //                                         MainAxisAlignment.start,
+                                    //                                         crossAxisAlignment:
+                                    //                                         CrossAxisAlignment.center,
+                                    //                                         children: [
+                                    //                                           Transform.rotate(
+                                    //                                               angle: pi * 0.2,
+                                    //                                               child: Icon(
+                                    //                                                   Icons
+                                    //                                                       .airplanemode_on_sharp,
+                                    //                                                   size: 20,
+                                    //                                                   color: Colors.grey)),
+                                    //                                           SizedBox(
+                                    //                                             width: 10,
+                                    //                                           ),
+                                    //                                           Text(
+                                    //                                             CacheData.lang == CacheHelperKeys.keyEN?
+                                    //                                             AirportsCubit.get(context).airPortsFiltered[index].englishName!:
+                                    //                                             AirportsCubit.get(context).airPortsFiltered[index].arabicName!,
+                                    //                                             style: TextStyle(
+                                    //                                                 fontWeight:
+                                    //                                                 FontWeight.bold,
+                                    //                                                 color: Colors.black),
+                                    //                                           ),
+                                    //                                         ],
+                                    //                                       ),
+                                    //                                       Divider()
+                                    //                                     ],
+                                    //                                   ),
+                                    //                                 ),
+                                    //                               )),
+                                    //                         ),
+                                    //                       ],
+                                    //                     ),
+                                    //                   );
+                                    //                 }
+                                    //               })
+                                    //         ],
+                                    //       ),
+                                    //     ),
+                                    //   ],
+                                    // );
+                                  });
+                                },
+                                child: DefaultField(
+                                    horizontalPadding: 20,
+                                    prefix:  Padding(
+                                      padding: const EdgeInsetsDirectional.only(start: 10.0, end: 10),
+                                      child: FaIcon(
+                                        FontAwesomeIcons.planeArrival,
+                                        color: ColorsManager.iconColor,
+                                        size: 20,
+                                      ),
+                                    ),
+                                    enabled: false,
+                                    hint: TranslationKeyManager.whereTo.tr,
+                                    controller: TextEditingController(
+                                      text: toAirport != null?
+                                      CacheData.lang == CacheHelperKeys.keyEN ?
+                                      toAirport!.englishName!:
+                                      toAirport!.arabicName! :
+                                      '',
+                                    ))),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8.0),
+                          child: IconButton(onPressed: ()
+                          {
+                            AirportModel? temp = fromAirport;
+                            fromAirport = toAirport;
+                            toAirport = temp;
+                            setState(() {});
+                          }, icon: Icon(Icons.change_circle, size: 35,)),
+                        ),
+                      ],
+                    ),
                     // InkWell(
                     //   onTap:()
                     //   {

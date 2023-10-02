@@ -31,9 +31,9 @@ class FlightModel {
   String? allowedWeightReturn;
   String? returnFlightNumber;
   String? createdAt;
-  String? returnEndDate1;
+  String? returnEndDate1; // return start time
   String? returnEndDate2;
-  String? arrivDate22;
+  String? arrivDate22; // arrival date
 
   FlightModel(
       {this.id,

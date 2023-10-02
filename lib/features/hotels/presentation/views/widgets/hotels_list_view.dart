@@ -18,21 +18,65 @@ class HotelsListView extends StatefulWidget {
 }
 
 class _HotelsListViewState extends State<HotelsListView> {
-  int adults=0;
+  bool hasSingle = false;
+  bool hasDouble = false;
+  bool hasTriple = false;
+  bool hasChildBed = false;
+  bool hasChildNoBed = false;
+  bool hasInfants = false;
+  int adultsSingle=0;
+  int adultsDouble=0;
+  int adultsTriple=0;
   int kidsWithBed=0;
   int kidsWithNoBed=0;
   int infants=0;
   @override
   void initState() {
 
-    HotelsCubit.get(context).roomsData.forEach((element)
+    for(int i=0; i<HotelsCubit.get(context).roomsData.length;i++)
     {
-      adults += element.adults;
-      kidsWithBed += element.kidsWithBed;
-      kidsWithNoBed += element.kidsWithNoBed;
-      infants += element.infants;
-    });
-    setState(() {});
+      print('object');
+      //adultsSingle += ProgramsCubit.get(context).roomsData[i].adults;
+      kidsWithBed += HotelsCubit.get(context).roomsData[i].kidsWithBed;
+      kidsWithNoBed += HotelsCubit.get(context).roomsData[i].kidsWithNoBed;
+      infants += HotelsCubit.get(context).roomsData[i].infants;
+      if(HotelsCubit.get(context).roomsData[i].adults==1)
+      {
+        hasSingle = true;
+        adultsSingle++;
+      }
+      else if(HotelsCubit.get(context).roomsData[i].adults==2)
+      {
+        hasDouble = true;
+        adultsDouble+=2;
+      }
+      else
+      {
+        adultsTriple+=3;
+        hasTriple = true;
+      }
+      if(HotelsCubit.get(context).roomsData[i].kidsWithBed >0)
+      {
+        hasChildBed = true;
+      }
+      if(HotelsCubit.get(context).roomsData[i].kidsWithNoBed >0)
+      {
+        hasChildNoBed = true;
+      }
+      if(HotelsCubit.get(context).roomsData[i].infants >0)
+      {
+        hasInfants = true;
+      }
+    }
+
+    // HotelsCubit.get(context).roomsData.forEach((element)
+    // {
+    //   adults += element.adults;
+    //   kidsWithBed += element.kidsWithBed;
+    //   kidsWithNoBed += element.kidsWithNoBed;
+    //   infants += element.infants;
+    // });
+    // setState(() {});
     super.initState();
   }
   @override
@@ -40,6 +84,7 @@ class _HotelsListViewState extends State<HotelsListView> {
     return BlocConsumer<HotelsCubit, HotelsStates>(
         listener: (context, state) {},
         builder: (context, state) {
+          var cubit = HotelsCubit.get(context);
          if(HotelsCubit.get(context).filteredHotels.isEmpty||widget.showAll)
          {
            if (state is ViewHotelsLoadingState ||
@@ -77,10 +122,17 @@ class _HotelsListViewState extends State<HotelsListView> {
                ),
                child: ListView.separated(
                  itemBuilder: (context, index) {
+                   // double net =
+                   //     (adults * double.parse(HotelsCubit.get(context).hotels[HotelsCubit.get(context).currentIndex][index].singlePrice!)) +
+                   //         (kidsWithBed * double.parse(HotelsCubit.get(context).hotels[HotelsCubit.get(context).currentIndex][index].childWithBedPrice!)) +
+                   //         (kidsWithNoBed * double.parse(HotelsCubit.get(context).hotels[HotelsCubit.get(context).currentIndex][index].childNoBedPrice!))
+                   // ;
                    double net =
-                       (adults * double.parse(HotelsCubit.get(context).hotels[HotelsCubit.get(context).currentIndex][index].singlePrice!)) +
-                           (kidsWithBed * double.parse(HotelsCubit.get(context).hotels[HotelsCubit.get(context).currentIndex][index].childWithBedPrice!)) +
-                           (kidsWithNoBed * double.parse(HotelsCubit.get(context).hotels[HotelsCubit.get(context).currentIndex][index].childNoBedPrice!))
+                       (adultsSingle * double.parse(HotelsCubit.get(context).hotels[HotelsCubit.get(context).currentIndex][index].singlePrice!)) +
+                       (adultsDouble * double.parse(HotelsCubit.get(context).hotels[HotelsCubit.get(context).currentIndex][index].doublePrice!)) +
+                       (adultsTriple * double.parse(HotelsCubit.get(context).hotels[HotelsCubit.get(context).currentIndex][index].triplePrice!)) +
+                       (kidsWithBed * double.parse(HotelsCubit.get(context).hotels[HotelsCubit.get(context).currentIndex][index].childWithBedPrice!)) +
+                       (kidsWithNoBed * double.parse(HotelsCubit.get(context).hotels[HotelsCubit.get(context).currentIndex][index].childNoBedPrice!))
                    ;
                    if(HotelsCubit.get(context).endDate.difference(HotelsCubit.get(context).startDate).inDays!=0)
                      net =  net*HotelsCubit.get(context).endDate.difference(HotelsCubit.get(context).startDate).inDays;
@@ -169,13 +221,16 @@ class _HotelsListViewState extends State<HotelsListView> {
                child: ListView.separated(
                  itemBuilder: (context, index) {
                    double net =
-                       (adults * double.parse(HotelsCubit.get(context).hotels[HotelsCubit.get(context).currentIndex][index].singlePrice!)) +
-                           (kidsWithBed * double.parse(HotelsCubit.get(context).hotels[HotelsCubit.get(context).currentIndex][index].childWithBedPrice!)) +
-                           (kidsWithNoBed * double.parse(HotelsCubit.get(context).hotels[HotelsCubit.get(context).currentIndex][index].childNoBedPrice!))
+                       (adultsSingle * double.parse(HotelsCubit.get(context).filteredHotels[index].singlePrice!)) +
+                           (adultsDouble * double.parse(HotelsCubit.get(context).filteredHotels[index].doublePrice!)) +
+                           (adultsTriple * double.parse(HotelsCubit.get(context).filteredHotels[index].triplePrice!)) +
+                           (kidsWithBed * double.parse(HotelsCubit.get(context).filteredHotels[index].childWithBedPrice!)) +
+                           (kidsWithNoBed * double.parse(HotelsCubit.get(context).filteredHotels[index].childNoBedPrice!))
                    ;
+
                    if(HotelsCubit.get(context).endDate.difference(HotelsCubit.get(context).startDate).inDays!=0)
                      net =  net*HotelsCubit.get(context).endDate.difference(HotelsCubit.get(context).startDate).inDays;
-                   double total = net+ (net*(double.parse(HotelsCubit.get(context).hotels[HotelsCubit.get(context).currentIndex][index].tax!)/100));
+                   double total = net+ (net*(double.parse(HotelsCubit.get(context).filteredHotels[index].tax!)/100));
 
                    return InkWell(
                    onTap: () {

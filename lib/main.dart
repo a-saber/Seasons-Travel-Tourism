@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
 import 'package:seasons/core/app_cubit/app_cubit.dart';
 import 'package:seasons/core/constant.dart';
@@ -35,6 +37,8 @@ import 'features/hotels/presentation/cubit/hotel_cubit/hotel_cubit.dart';
 import 'features/programs_view/presentation/cubit/programs_cubit.dart';
 import 'features/sign_in/presentaion/cubit/login_cubit/login_cubit.dart';
 import 'firebase_options.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 
 Future onBackground(RemoteMessage message) async {
@@ -57,17 +61,30 @@ void main() async {
   await DioHelper.init();
   await CacheHelper.init();
   setupForgotPassSingleton();
+  // if (!kIsWeb &&
+  //     kDebugMode &&
+  //     defaultTargetPlatform == TargetPlatform.android) {
+  //   await InAppWebViewController.setWebContentsDebuggingEnabled(kDebugMode);
+  // }
+
+  // Plugin must be initialized before using
+  await FlutterDownloader.initialize(
+      debug: true,
+      // optional: set to false to disable printing logs to console (default: true)
+      ignoreSsl:
+      true // option: set to false to disable working with http links (default: false)
+  );
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  FirebaseMessaging.instance;
-  FirebaseMessaging.onBackgroundMessage(onBackground);
-  FirebaseMessaging.instance.getToken().then((value) {
-    print(value);
-    token = value;
-  });
-  print("////////////****************///////////");
-  getMessage();
+  // FirebaseMessaging.instance;
+  // FirebaseMessaging.onBackgroundMessage(onBackground);
+  // FirebaseMessaging.instance.getToken().then((value) {
+  //   print(value);
+  //   token = value;
+  // });
+  // print("////////////****************///////////");
+  // getMessage();
   //await CacheHelper.saveData(key: CacheHelperKeys.langKey, value: CacheHelperKeys.keyAR);
 
   CacheData.lang = await CacheHelper.getData(key: CacheHelperKeys.langKey);
@@ -128,11 +145,13 @@ class MyApp extends StatelessWidget {
                 AboutCubit(getIt.get<SettingsRepoImplementation>())),
         BlocProvider(create: (BuildContext context) => AppCubit()),
         BlocProvider(create: (BuildContext context) => BookInfoCubit()),
-        BlocProvider(create: (BuildContext context) => HomeCubit()),
-        BlocProvider(create: (BuildContext context) => ProgramsCubit()),
         BlocProvider(create: (BuildContext context) => FlightsCubit()),
+        BlocProvider(create: (BuildContext context) => ProgramsCubit()),
         BlocProvider(create: (BuildContext context) => AirportsCubit()),
         BlocProvider(create: (BuildContext context) => TrainCubit()),
+        BlocProvider(create: (BuildContext context) => HomeCubit()),
+        BlocProvider(create: (BuildContext context) => SliderCubit()..getSlider(context)),
+
       ],
       child: GetMaterialApp(
         theme: ThemeData(

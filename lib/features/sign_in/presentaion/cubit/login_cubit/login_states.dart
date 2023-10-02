@@ -30,6 +30,14 @@ class GetImageSuccessState extends LoginStates{}
 class GetImageErrorState extends LoginStates{}
 class UploadLoadingState extends LoginStates{}
 
+class DeleteUserSuccessState extends LoginStates{}
+class DeleteUserErrorState extends LoginStates{
+  final String error;
+  DeleteUserErrorState(this.error);
+}
+class DeleteUserLoadingState extends LoginStates{
+}
+
 class UploadSuccessState extends LoginStates {}
 
 class NotPickedState extends LoginStates {}

@@ -1,6 +1,10 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seasons/core/core_widgets/flutter_toast.dart';
+import 'package:seasons/core/dio_helper/dio_helper.dart';
 
 import '../../../data/models/cars_model.dart';
 import '../../../data/repo/car_repo_implementation.dart';
@@ -58,6 +62,25 @@ class CarsCubit extends Cubit<CarsStates> {
           return selectedCars;
         }
       }
+    }
+  }
+
+  Future<CarSearchModel?> getCarById(String id) async
+  {
+    try
+    {
+      var data = await DioHelper.postDate(
+        endPoint: '/car-view-with-id',
+        query: {"id":id}
+      );
+      final parsed = jsonDecode(data.data.toString()).cast<Map<String, dynamic>>();
+      return CarSearchModel.fromJson(parsed[0]);
+    }
+    catch (e)
+    {
+      print("car error");
+      print(e.toString());
+      return null;
     }
   }
 }

@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seasons/core/core_widgets/flutter_toast.dart';
 import 'package:seasons/core/core_widgets/my_snack_bar.dart';
+import 'package:seasons/core/dio_helper/dio_helper.dart';
 import 'package:seasons/features/hotels/data/models/city_model.dart';
 import 'package:seasons/features/hotels/data/models/hotel_model.dart';
 import 'package:seasons/features/hotels/data/repos/hotel_repo_implementation.dart';
@@ -85,6 +88,21 @@ class HotelsCubit extends Cubit<HotelsStates> {
         callMySnackBar(context: context, text: 'Error happened');
       }
     });
+  }
+
+  Future<HotelModel?> getHotelByID(String id) async
+  {
+    try {
+      var data = await DioHelper.postDate(
+        endPoint: '/single-hotel',query: {"id":id}
+      );
+      final parsed = jsonDecode(data.data.toString());
+      HotelModel hotelModel = HotelModel.fromJson(parsed['data']);
+      return hotelModel;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
   }
 
   List<HotelCityModel> cities = [];

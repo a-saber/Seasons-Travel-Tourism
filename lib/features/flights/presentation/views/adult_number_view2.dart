@@ -9,12 +9,16 @@ import 'package:seasons/core/local_database/cache_helper_keys.dart';
 import 'package:seasons/core/localization/translation_key_manager.dart';
 import 'package:seasons/core/resources_manager/colors_manager.dart';
 import 'package:seasons/core/resources_manager/style_manager.dart';
+import 'package:seasons/features/flights/data/models/flight_model.dart';
 import 'package:seasons/features/flights/presentation/cubit/flights_cubit.dart';
+import 'package:seasons/features/flights/presentation/views/flight_passenger_data.dart';
 
 
 class AdultNumberView2 extends StatefulWidget {
-  const AdultNumberView2({Key? key, required this.adults, required this.infants, required this.kids}) : super(key: key);
+  const AdultNumberView2({Key? key, this.flightModel, this.fromOffer = false, required this.adults, required this.infants, required this.kids}) : super(key: key);
 
+  final FlightModel? flightModel ;
+  final bool fromOffer ;
   final int adults ;
   final int infants ;
   final int kids ;
@@ -44,9 +48,18 @@ class _AdultNumberView2State extends State<AdultNumberView2> {
         appbarTitle: TranslationKeyManager.passengers.tr,
         action:  IconButton(onPressed: ()
         {
+          if(widget.fromOffer)
+          {
+            Get.to(()=>FlightPassengerData2(
+              flightModel: widget.flightModel!,
+                adults: adults, infants: infants, kids: kids
+            ));
+          }
+          else {
             FlightsCubit.get(context).passengersSetter(
                 adults: adults, infants: infants, kids: kids);
             Navigator.pop(context);
+          }
 
         }, icon: Icon(Icons.check,color: Colors.white,)),
         button: SizedBox(),

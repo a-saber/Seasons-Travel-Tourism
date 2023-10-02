@@ -18,6 +18,9 @@ import 'package:seasons/features/book_info/presentaion/views/widgets/book_info_s
 import 'package:seasons/features/hotels/presentation/views/widgets/hotels_list_item.dart';
 import 'package:seasons/features/settings/presentation/cubit/info_cubit/info_cubit.dart';
 import 'package:seasons/features/sign_in/presentaion/views/widgets/default_form_field.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import 'book_web_view.dart';
 
 
 class BookInfoScreen extends StatefulWidget {
@@ -67,9 +70,20 @@ class _BookInfoScreenState extends State<BookInfoScreen> {
                   ),
                   SizedBox(height: 40,),
                   InkWell(
-                    onTap: code.text.isNotEmpty? (){
-                      BookInfoCubit.get(context).getBookInfo(code: code.text);
-                    //  callMySnackBar(context: context, text: 'no data');
+                    onTap: code.text.isNotEmpty? ()async{
+                     // BookInfoCubit.get(context).initController();
+                      Get.to(()=>Scaffold(
+                        body: (IconButton(
+                            onPressed: ()async{
+                              if(await canLaunchUrl(Uri.parse('https://seasonstours.netlify.app/en/cars-checkout/WyqTvUpuBH10X6aQ')))
+                              await launchUrl(Uri.parse('https://freecomputerbooks.com/An-Introduction-to-Statistical-Learning.html'));
+
+                            }, icon: Icon(Icons.add))),
+                      ));
+                         // Get.to(()=> BookWebView(),
+                     // );
+                      //todo
+                     // BookInfoCubit.get(context).getBookInfo(code: code.text);
                     } : null,
                     child: Container(
                       height: 40,
@@ -96,7 +110,16 @@ class _BookInfoScreenState extends State<BookInfoScreen> {
                 ],
               ),
             ),
-            BlocConsumer<BookInfoCubit, BookInfoStates>(
+
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/*
+ BlocConsumer<BookInfoCubit, BookInfoStates>(
               builder: (context, state)
               {
                 if(state is GetBookLoadingState)
@@ -298,12 +321,10 @@ class _BookInfoScreenState extends State<BookInfoScreen> {
               },
               listener: (context, state){}),
 
+ */
 
-          ],
-        ),
-      ),
-    );
-    return BasicView2(
+/*
+return BasicView2(
       appbarTitle: TranslationKeyManager.booksInquiry.tr,
       buttonText: TranslationKeyManager.bookInquiryBtn.tr,
       onTap: (){callMySnackBar(context: context, text: 'no data');},
@@ -311,133 +332,5 @@ class _BookInfoScreenState extends State<BookInfoScreen> {
       children: [
 
       ],
-    );
-
-  }
-}
-
-/*
-Scaffold(
-      appBar: defaultAppBar(
-        context: context,
-        text: TranslationKeyManager.booksInquiry.tr,
-      ),
-      body: SafeArea(
-        child: SizedBox(
-          height: double.infinity,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Align(
-                alignment: Alignment.topCenter,
-                child: Container(
-                  height: MediaQuery.of(context).size.height*0.5,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(30),
-                        bottomRight: Radius.circular(30),
-
-                      ),
-                      gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors:
-                          [
-                            ColorsManager.primaryColor,
-                            Color(0xff604fb4),
-                            Color(0xff604fb4)
-
-                          ])
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 20.0,left:20,bottom: 75),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Material(
-                        borderRadius: BorderRadius.circular(20),
-                        elevation: 5,
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: Theme.of(context).scaffoldBackgroundColor,
-                              borderRadius: BorderRadius.circular(20)
-                          ),
-                          padding: EdgeInsets.symmetric(vertical: 40),
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 20),
-                                child: Text(TranslationKeyManager.bookSearchCodeBtn.tr,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 22
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 60,),
-                              DefaultField(
-                                hint: 'Code',
-                                controller: code,
-                                onChange: (String? val){setState((){});},
-                              ),
-                              SizedBox(height: 40,),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 20,),
-                      InkWell(
-                        onTap: code.text.isEmpty?null:
-                            ()
-                        {
-                          callMySnackBar(context: context, text: 'no data');
-                        },
-                        child: Container(
-                          height: 50,
-                          margin: EdgeInsets.symmetric(horizontal: 30),
-                          decoration: BoxDecoration(
-                              color: code.text.isEmpty?
-                              Colors.grey: ColorsManager.primaryColor,
-                              gradient: LinearGradient(colors: [ColorsManager.primaryColor, ColorsManager.primaryTwoColor]),
-                              borderRadius: BorderRadius.circular(10)
-                          ),
-                          padding: EdgeInsets.all(10),
-                          child: Center(
-                            child: Text(
-                              TranslationKeyManager.bookInquiryBtn.tr,
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: "Cairo",
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    )
- */
-
-/*
- return SafeArea(
-      child: Scaffold(
-        appBar: defaultAppBar(
-            context: context,
-            text: TranslationKeyManager.booksInquiry.tr,
-        ),
-        body: const BookInfoScreenBody(),
-      ),
     );
  */

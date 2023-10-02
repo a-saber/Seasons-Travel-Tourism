@@ -6,6 +6,7 @@ import 'package:seasons/core/dio_helper/dio_helper.dart';
 import 'package:seasons/core/errors/failures.dart';
 import 'package:seasons/features/airports/data/models/airport_model.dart';
 import 'package:seasons/features/flights/presentation/views/flight_passenger_data.dart';
+import 'package:seasons/features/hotels/data/models/city_model.dart';
 import 'package:seasons/features/programs_view/data/models/city_model.dart';
 import 'package:seasons/features/programs_view/data/models/country_model.dart';
 import 'package:seasons/features/programs_view/data/models/program_model.dart';
@@ -116,6 +117,7 @@ class ProgramsCubit extends Cubit<ProgramsStates>
       emit(CitiesGetErrorState(error.toString()));
     });
   }
+
 
   Future collectData(parsed)async
   {
@@ -326,6 +328,25 @@ class ProgramsCubit extends Cubit<ProgramsStates>
       else
         emit(ProgramsBookErrorState('Sorry, something happened try again later'));
     });
+  }
+
+  Future<ProgrammeCityModel?> getCityByID() async {
+    // todo
+    await DioHelper.postDate(endPoint: '/city-by-id').
+    then((value) {
+      ProgrammeCityModel cityModel = ProgrammeCityModel.fromJson(value.data);
+      return cityModel;
+    });
+    return null;
+  }
+
+  Future<CountryModel?> getCountryByID() async {
+    await DioHelper.postDate(endPoint: '/country-by-id').
+    then((value) {
+      CountryModel countryModel = CountryModel.fromJson(value.data['country']);
+      return countryModel;
+    });
+    return null;
   }
 }
 

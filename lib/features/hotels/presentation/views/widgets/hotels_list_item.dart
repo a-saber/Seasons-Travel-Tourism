@@ -109,6 +109,8 @@ class HotelsListItem2 extends StatefulWidget {
   final double total;
   final HotelModel hotel;
 
+
+
   @override
   State<HotelsListItem2> createState() => _HotelsListItem2State();
 }
@@ -160,8 +162,6 @@ class _HotelsListItem2State extends State<HotelsListItem2> {
     return  BlocConsumer<HotelsCubit, HotelsStates>(
         listener:(context, state) {},
         builder: (context, state) {
-
-
           return Material(
             borderRadius: BorderRadius.circular(10),
             elevation: 3,
@@ -180,22 +180,22 @@ class _HotelsListItem2State extends State<HotelsListItem2> {
                       // height: 150,
                       child: CachedNetworkImage(
                         imageBuilder: (context, provider)=>
-                            Container(height: 150,width: double.infinity,decoration: BoxDecoration(image: DecorationImage(image: provider,fit: BoxFit.cover,),),),
+                            Container(height: 200,width: double.infinity,decoration: BoxDecoration(image: DecorationImage(image: provider,fit: BoxFit.fill,),),),
                         imageUrl:
-                        'https://api.seasonsge.com/${widget.hotel.mainImage}',
+                        'https://api.seasonsge.com/images/${widget.hotel.mainImage}',
                         placeholder: (context, error) =>
                             Padding(
                               padding: const EdgeInsets.symmetric(vertical: 70.0),
                               child: CircularProgressIndicator(),
                             ),
-                        fit: BoxFit.cover,
+                        fit: BoxFit.fill,
                         errorWidget: (context, url, error) =>
                             Container(
-                              height: 150,width: double.infinity,
+                              height: 200,width: double.infinity,
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                   image: AssetImage(AssetsManager.hotel),
-                                  fit: BoxFit.cover,),),),
+                                  fit: BoxFit.fill,),),),
                       ),
                     ),
                     SizedBox(height: 5,),
@@ -224,7 +224,7 @@ class _HotelsListItem2State extends State<HotelsListItem2> {
                           Align(
                             alignment: AlignmentDirectional.centerStart,
                             child: Text(
-                              'Hotel type : ${widget.hotel.hotelType!}' ,
+                              'Meal type : ${widget.hotel.hotelType!}' ,
                               style: TextStyle(color: ColorsManager.primaryColor,
                                   fontWeight: FontWeight.bold, fontSize: 12),),
                           ),
@@ -452,7 +452,6 @@ class _HotelsListItem2State extends State<HotelsListItem2> {
                                 ),
                               ],
                             ),
-
                         ],
                       ),
                     ),

@@ -10,4 +10,7 @@ abstract class LoginRepo {
   Future<Either<Failure, RegisterResponse>> register(
       {required UserModel userModel, required String? filePath,
         required String? name,});
+
+  Future<Either<Failure, DeleteUserResponse>> deleteUser(
+      {required String userId});
 }

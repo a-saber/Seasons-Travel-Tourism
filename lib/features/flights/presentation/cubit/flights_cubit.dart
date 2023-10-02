@@ -97,6 +97,38 @@ class FlightsCubit extends Cubit<FlightsStates> {
     }
   }
 
+  Future<FlightModel?> getFlightByID(String id) async {
+    try {
+      var value = await DioHelper.getDate(url: '/flights', query: {"flight_id":id});
+      final parsed = jsonDecode(value.data.toString());
+
+          FlightModel flightModel = FlightModel.fromJson(parsed);
+          if (DateTime.parse(flightModel.departureDate!).isAfter(
+              DateTime.now()) ||
+              DateTime.parse(flightModel.departureDate!) == DateTime.now())
+          {
+            specialDates.add(DateTime.parse(flightModel.departureDate!));
+            specialDates.add(DateTime.parse(flightModel.returnStartDate!));
+            var fromAirport =await DioHelper.postDate(endPoint: '/viewAirportById',
+                query: {'id': flightModel.fromAirport.toString()});
+            flightModel.from = AirportModel.fromJson(fromAirport.data['data']);
+
+            var toAirport =await DioHelper.postDate(endPoint: '/viewAirportById',
+                query: {'id': flightModel.toAirport.toString()});
+            flightModel.to = AirportModel.fromJson(toAirport.data['data']);
+            var airLine =await DioHelper.postDate(endPoint: '/airline-view-by-id',
+                query: {'id': flightModel.flightLine.toString()});
+            flightModel.airlineModel = AirlineModel.fromJson(airLine.data['airline']);
+            return flightModel;
+          }
+    }catch(e)
+    {
+      print(e.toString());
+      return null;
+    }
+    return null;
+  }
+
   void filter({
     required int from,
     required int to,

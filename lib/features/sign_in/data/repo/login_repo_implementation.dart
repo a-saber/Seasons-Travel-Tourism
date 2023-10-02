@@ -61,4 +61,28 @@ class LoginRepoImplementation extends LoginRepo {
     }
   }
 
+  @override
+  Future<Either<Failure, DeleteUserResponse>> deleteUser({required String userId}) async {
+    try {
+      var data = await DioHelper.getDate(url: 'delete-user', query:
+      {
+        "user_id": userId
+      });
+      print(data.data!.toString());
+      DeleteUserResponse deleteUserResponse = DeleteUserResponse.fromJson(data.data);
+      if(deleteUserResponse.status=="success")
+      return right(deleteUserResponse);
+      else
+        return left(ServerFailure(deleteUserResponse.message!));
+    } catch (e) {
+      print("Nooooooooooooooooo");
+      print(e.toString());
+      if (e is DioError) {
+        print("diooooooooooo Nooooooooooooooooo");
+        return left(ServerFailure.fromDioError(e));
+      }
+      return left(ServerFailure(e.toString()));
+    }
+  }
+
 }
