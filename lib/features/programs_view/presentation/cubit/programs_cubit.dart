@@ -29,9 +29,17 @@ class ProgramsCubit extends Cubit<ProgramsStates>
   List<RoomData> roomsData = [
     RoomData(),
   ];
+List<RoomData> roomsDataSearch = [
+    RoomData(),
+  ];
 
   void roomsDataSetter(List<RoomData> roomsData) {
     this.roomsData = roomsData;
+    emit(RoomsDataSetterState());
+  }
+
+  void roomsDataSetterSearch(List<RoomData> roomsData) {
+    this.roomsDataSearch = roomsData;
     emit(RoomsDataSetterState());
   }
 
@@ -218,6 +226,36 @@ class ProgramsCubit extends Cubit<ProgramsStates>
       print('catch error get programs');
       print(e.toString());
       emit(ProgramsGetErrorState(e.toString()));
+    }
+  }
+
+  Future<ProgramModel?> getProgramById(String id) async
+  {
+    try {
+      var response = await DioHelper.getDate(url: '/get_program', query: {'id':id});
+      ProgramModel program = ProgramModel.fromJson(response.data);
+      var airportFrom = await DioHelper.postDate(endPoint: '/viewAirportById', query: {'id': program.departureFrom});
+      program.departureAirportModel = airportFrom.data['data']==null?null: AirportModel.fromJson(airportFrom.data['data']);
+      var airportTo = await DioHelper.postDate(endPoint: '/viewAirportById', query: {'id': program.arrivalTo});
+      program.arrivalAirportModel =airportTo.data['data']==null?null:  AirportModel.fromJson(airportTo.data['data']);
+      var airportReturnFrom = await DioHelper.postDate(endPoint: '/viewAirportById', query: {'id': program.returnFrom});
+      program.returnFromAirportModel =airportReturnFrom.data['data']==null?null:  AirportModel.fromJson(airportReturnFrom.data['data']);
+
+      var airportReturnTo = await DioHelper.postDate(endPoint: '/viewAirportById', query: {'id': program.returnTo});
+      program.returnToAirportModel =airportReturnTo.data['data']==null?null:  AirportModel.fromJson(airportReturnTo.data['data']);
+
+      var departureAirLine = await DioHelper.postDate(endPoint: '/airline-view-by-id', query: {'id': program.departureAirline});
+      program.departureAirlineModel =departureAirLine.data['airline']==null?null:  AirlineModel.fromJson(departureAirLine.data['airline']);
+
+      var returnAirline = await DioHelper.postDate(endPoint: '/airline-view-by-id', query: {'id': program.returnAirline});
+      program.returnAirlineModel =returnAirline.data['airline']==null?null: AirlineModel.fromJson(returnAirline.data['airline']);
+
+      return program;
+    }catch(e)
+    {
+      print('catch error get programs');
+      print(e.toString());
+      return null;
     }
   }
 

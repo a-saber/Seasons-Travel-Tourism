@@ -29,6 +29,7 @@ import 'core/local_database/cache_helper_keys.dart';
 import 'core/localization/app_localization.dart';
 import 'core/localization/translation_key_manager.dart';
 import 'core/service_locator/service_locator.dart';
+import 'features/Archives/cubit/archives_cubit.dart';
 import 'features/airports/cubit/airports_cubit.dart';
 import 'features/flights/presentation/cubit/flights_cubit.dart';
 import 'features/home/cubit/home_cubit.dart';
@@ -68,15 +69,15 @@ void main() async {
   // }
 
   // Plugin must be initialized before using
-  await FlutterDownloader.initialize(
-      debug: true,
-      // optional: set to false to disable printing logs to console (default: true)
-      ignoreSsl:
-      true // option: set to false to disable working with http links (default: false)
-  );
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  // await FlutterDownloader.initialize(
+  //     debug: true,
+  //     // optional: set to false to disable printing logs to console (default: true)
+  //     ignoreSsl:
+  //     true // option: set to false to disable working with http links (default: false)
+  // );
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
   // FirebaseMessaging.instance;
   // FirebaseMessaging.onBackgroundMessage(onBackground);
   // FirebaseMessaging.instance.getToken().then((value) {
@@ -150,6 +151,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (BuildContext context) => AirportsCubit()),
         BlocProvider(create: (BuildContext context) => TrainCubit()),
         BlocProvider(create: (BuildContext context) => HomeCubit()),
+        BlocProvider(create: (BuildContext context) => ArchivesCubit()),
         BlocProvider(create: (BuildContext context) => SliderCubit()..getSlider(context)),
 
       ],

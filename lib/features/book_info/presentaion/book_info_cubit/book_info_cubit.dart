@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seasons/core/dio_helper/dio_helper.dart';
+import 'package:seasons/core/errors/failures.dart';
 import 'package:seasons/features/book_info/presentaion/book_info_cubit/book_info_states.dart';
 import 'package:seasons/features/hotels/data/models/hotel_model.dart';
 
@@ -11,48 +13,52 @@ class BookInfoCubit extends Cubit<BookInfoStates> {
 
   static BookInfoCubit get(context) => BlocProvider.of(context);
 
+  String? type;
   HotelModel? hotel;
   Future<void> getBookInfo({
     required String code,
-  }) async {
+  }) async
+  {
     emit(GetBookLoadingState());
-    await DioHelper.getDate(
-        url: '/boking-search',
-        query: {'booking_code':code}
-    ).then((value) async
+    type = null;
+    try
     {
-      print('000000000');
-      if(value.data['bookings'].isNotEmpty)// car
+      var response = await DioHelper.getDate(url: '/boking-search', query: {'booking_code': code});
+      if (response.data['bookings'].isNotEmpty) // car
       {
-        emit(GetBookSuccessState(value.data));
+        type = 'cars';
       }
-      else if(value.data['hotel_reservations'].isNotEmpty)  // hotel
+      else if (response.data['hotel_reservations'].isNotEmpty) // hotel
       {
-        print('object');
-        await DioHelper.postDate(
-            endPoint: '/single-hotel',
-            query: {'id':value.data['hotel_reservations'][0]['hotel_id']}
-        ).then((hotelResponse)
-        {
-
-          final parsed = jsonDecode(hotelResponse.data.toString());
-          if(parsed['success']==true) {
-            hotel = HotelModel.fromJson(parsed['data']);
-            emit(GetBookSuccessState(value.data));
-          }
-          else emit(GetBookErrorState(parsed['message']));
-        })
-        .catchError((error)
-        {
-          print(error.toString());
-          emit(GetBookErrorState(error.toString()));
-        });
+        type = 'hotels';
       }
-    })
-    .catchError((error)
+      else if (response.data['bookingss'].isNotEmpty) // flight
+      {
+        type = 'flights';
+      }
+      else if (response.data['reservations'].isNotEmpty) //programs
+      {
+        type = 'programs';
+      }
+      if(type == null)
+      {
+        emit(GetBookErrorState('sorry there is an error, try again later'));
+      }
+      else
+      {
+        emit(GetBookSuccessState('${type}-checkout/${code}'));
+      }
+    }
+    catch(e)
     {
-      emit(GetBookErrorState(error.toString()));
-    });
-
+      if(e is DioError)
+      {
+        emit(GetBookErrorState(ServerFailure.fromDioError(e).errorMessage));
+      }
+      else
+      {
+        emit(GetBookErrorState(e.toString()));
+      }
+    }
   }
 }

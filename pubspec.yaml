@@ -61,7 +61,7 @@ dependencies:
   rename: ^2.1.1
   fluttertoast: ^8.0.9
   url_launcher: ^6.1.11
-  syncfusion_flutter_datepicker: ^20.4.54
+  syncfusion_flutter_datepicker: ^23.1.39
   intl:
   numberpicker:
   image_picker: ^0.8.7+2
@@ -69,7 +69,7 @@ dependencies:
   webview_flutter: ^4.2.4
   webview_flutter_android:
   webview_flutter_wkwebview:
-  flutter_inappwebview: ^5.4.0
+  flutter_inappwebview: ^5.8.0
   path_provider: ^2.1.1
   flutter_downloader: ^1.11.3
   permission_handler: ^11.0.0

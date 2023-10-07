@@ -59,15 +59,15 @@ class _MainHomeViewState extends State<MainHomeView> {
 
   @override
   void initState() {
-    subScribe();
-    requestPermission();
-    FirebaseMessaging.onMessage.listen((event) {
-      showToast(
-          massage: "${event.notification!.body}", state: ToastState.SUCCESS);
-    });
-    FirebaseMessaging.onMessageOpenedApp.listen((event) {
-      NavigateTo(context, MainHomeView());
-    });
+    // subScribe();
+    // requestPermission();
+    // FirebaseMessaging.onMessage.listen((event) {
+    //   showToast(
+    //       massage: "${event.notification!.body}", state: ToastState.SUCCESS);
+    // });
+    // FirebaseMessaging.onMessageOpenedApp.listen((event) {
+    //   NavigateTo(context, MainHomeView());
+    // });
     super.initState();
   }
 

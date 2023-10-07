@@ -71,19 +71,9 @@ class _BookInfoScreenState extends State<BookInfoScreen> {
                   SizedBox(height: 40,),
                   InkWell(
                     onTap: code.text.isNotEmpty? ()async{
-                     // BookInfoCubit.get(context).initController();
-                      Get.to(()=>Scaffold(
-                        body: (IconButton(
-                            onPressed: ()async{
-                              if(await canLaunchUrl(Uri.parse('https://seasonstours.netlify.app/en/cars-checkout/WyqTvUpuBH10X6aQ')))
-                              await launchUrl(Uri.parse('https://freecomputerbooks.com/An-Introduction-to-Statistical-Learning.html'));
 
-                            }, icon: Icon(Icons.add))),
-                      ));
-                         // Get.to(()=> BookWebView(),
-                     // );
-                      //todo
-                     // BookInfoCubit.get(context).getBookInfo(code: code.text);
+                      Get.to(()=> BookWebView());
+                      BookInfoCubit.get(context).getBookInfo(code: code.text);
                     } : null,
                     child: Container(
                       height: 40,

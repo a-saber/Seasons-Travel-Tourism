@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seasons/core/core_widgets/flutter_toast.dart';
 import 'package:seasons/core/dio_helper/dio_helper.dart';
+import 'package:seasons/features/cars/data/models/car_types.dart';
 
 import '../../../data/models/cars_model.dart';
 import '../../../data/repo/car_repo_implementation.dart';
@@ -35,8 +36,6 @@ class CarsCubit extends Cubit<CarsStates> {
   {
     for (int i = 0; i < carsRepoImplementation.car!.length; i++) {
       if (carsRepoImplementation.car![i].id.toString() == typeId) {
-        print("***************");
-        print("Aya");
         print(carsRepoImplementation.car![i].name);
         print(carsRepoImplementation.car![i].nameEn);
         return carsRepoImplementation.car![i];
@@ -56,6 +55,7 @@ class CarsCubit extends Cubit<CarsStates> {
         if (i == index) {
           for (int j = 0; j < cars.length; j++) {
             if (carsRepoImplementation.car![i - 1].id.toString() == cars[j].typeId) {
+              cars[j].carTypes = carsRepoImplementation.car![i - 1];
               selectedCars!.add(cars[j]);
             }
           }
@@ -74,11 +74,31 @@ class CarsCubit extends Cubit<CarsStates> {
         query: {"id":id}
       );
       final parsed = jsonDecode(data.data.toString()).cast<Map<String, dynamic>>();
-      return CarSearchModel.fromJson(parsed[0]);
+      CarSearchModel car =  CarSearchModel.fromJson(parsed[0]);
+      car.carType = await getCarTypeById(car.typeId.toString());
+      return car;
     }
     catch (e)
     {
       print("car error");
+      print(e.toString());
+      return null;
+    }
+  }
+  Future<CarTypes?> getCarTypeById(String id) async
+  {
+    try
+    {
+      var data = await DioHelper.getDate(
+          url: '/get_car_by_id',
+          query: {"id":id}
+      );
+      //final parsed = jsonDecode(data.data.toString()).cast<Map<String, dynamic>>();
+      return CarTypes.fromJson(data.data);
+    }
+    catch (e)
+    {
+      print("car type error");
       print(e.toString());
       return null;
     }

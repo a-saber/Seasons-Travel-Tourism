@@ -18,8 +18,17 @@ class HotelsCubit extends Cubit<HotelsStates> {
     RoomData(),
   ];
 
+  List<RoomData> roomsDataSearch = [
+    RoomData(),
+  ];
+
   void roomsDataSetter(List<RoomData> roomsData) {
     this.roomsData = roomsData;
+    emit(RoomsDataSetterState());
+  }
+
+  void roomsDataSearchSetter(List<RoomData> roomsData) {
+    this.roomsDataSearch = roomsData;
     emit(RoomsDataSetterState());
   }
 
@@ -98,7 +107,23 @@ class HotelsCubit extends Cubit<HotelsStates> {
       );
       final parsed = jsonDecode(data.data.toString());
       HotelModel hotelModel = HotelModel.fromJson(parsed['data']);
+      hotelModel.cityModel = await getCityByID(hotelModel.city!);
       return hotelModel;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
+  Future<HotelCityModel?> getCityByID(String id) async
+  {
+    try {
+      var data = await DioHelper.getDate(
+          url: '/get_city',query: {"id":id}
+      );
+      //final parsed = jsonDecode(data.data.toString());
+      HotelCityModel city = HotelCityModel.fromJson(data.data);
+      return city;
     } catch (e) {
       print(e.toString());
       return null;

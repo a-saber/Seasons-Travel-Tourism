@@ -15,71 +15,59 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 //'https://seasonstours.netlify.app/en/cars-checkout/WyqTvUpuBH10X6aQ'
 
-class BookWebView extends StatefulWidget {
-  BookWebView();
+class ArchivesWebView extends StatefulWidget {
+  ArchivesWebView(this.url);
+  final String url;
   @override
-  _BookWebViewState createState() => _BookWebViewState();
+  _ArchivesWebViewState createState() => _ArchivesWebViewState();
 }
 
-class _BookWebViewState extends State<BookWebView> {
+class _ArchivesWebViewState extends State<ArchivesWebView> {
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: BlocConsumer<BookInfoCubit, BookInfoStates>(
-        listener: (context, state) {},
-        builder: (context, state)
+      body: Builder(
+        builder: (context)
         {
-          if(state is GetBookSuccessState) {
-            var controller = WebViewController()
-              ..setJavaScriptMode(JavaScriptMode.unrestricted)
-              ..setBackgroundColor(const Color(0x00000000))
-              ..setNavigationDelegate(
-                NavigationDelegate(
-                  onProgress: (int progress) {
-                    // Update loading bar.
-                  },
-                  onPageStarted: (String url) {},
-                  onPageFinished: (String url) {},
-                  onWebResourceError: (WebResourceError error) {},
-                  onNavigationRequest: (NavigationRequest request) {
-                    if (request.url.startsWith('https://www.youtube.com/')) {
-                      return NavigationDecision.prevent;
-                    }
-                    return NavigationDecision.navigate;
-                  },
-                ),
-              )
-              ..loadRequest(Uri.parse('https://seasonstours.netlify.app/en/${state.url}'));
-            return Padding(
+          var controller = WebViewController()
+            ..setJavaScriptMode(JavaScriptMode.unrestricted)
+            ..setBackgroundColor(const Color(0x00000000))
+            ..setNavigationDelegate(
+              NavigationDelegate(
+                onProgress: (int progress) {
+                  // Update loading bar.
+                },
+                onPageStarted: (String url) {},
+                onPageFinished: (String url) {},
+                onWebResourceError: (WebResourceError error) {},
+                onNavigationRequest: (NavigationRequest request) {
+                  if (request.url.startsWith('https://www.youtube.com/')) {
+                    return NavigationDecision.prevent;
+                  }
+                  return NavigationDecision.navigate;
+                },
+              ),
+            )
+            ..loadRequest(Uri.parse('https://seasonstours.netlify.app/en/${widget.url}'));
+          return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: WillPopScope(
-                onWillPop: ()async
-                {
-                  if(await controller.canGoBack()) {
-                    controller.goBack();
-                    return Future.value(false);
-                  }
-                  else
+                  onWillPop: ()async
                   {
-                    return Future.value(true);
-                  }
-                },
+                    if(await controller.canGoBack()) {
+                      controller.goBack();
+                      return Future.value(false);
+                    }
+                    else
+                    {
+                      return Future.value(true);
+                    }
+                  },
                   child: WebViewWidget(controller: controller,))
-            );
-          }
-          else if (state is GetBookLoadingState)
-          {
-            return Center(child: CircularProgressIndicator());
-          }
-          else if(state is GetBookErrorState)
-          {
-            return Text(state.error);
-          }
-          else return SizedBox();
-        },
-      ),
+          );
+        }),
     );
   }
 }

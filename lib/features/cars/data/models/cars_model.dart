@@ -1,6 +1,9 @@
+import 'package:seasons/features/cars/data/models/car_types.dart';
+
 class CarsModel {
   String? id;
   String? typeId;
+  CarTypes? carTypes;
   String? tax;
   String? pricePerDay;
   String? priceWithDriver;
@@ -14,6 +17,7 @@ class CarsModel {
       this.pricePerDay,
       this.priceWithDriver,
       this.imagePath,
+      this.carTypes,
       this.status});
 
   CarsModel.fromJson(Map<String, dynamic> json) {
@@ -46,6 +50,7 @@ class CarSearchModel {
   String? priceWithDriver;
   String? imagePath;
   int? status;
+  CarTypes? carType;
 
   CarSearchModel(
       {this.id,
@@ -54,6 +59,7 @@ class CarSearchModel {
       this.pricePerDay,
       this.priceWithDriver,
       this.imagePath,
+      this.carType,
       this.status});
 
   CarSearchModel.fromJson(Map<String, dynamic> json) {

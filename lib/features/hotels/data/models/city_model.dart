@@ -3,11 +3,11 @@ import 'dart:typed_data';
 import 'package:dio/dio.dart';
 
 class HotelCityModel {
-  int? id;
+  var id;
   String? name;
   String? nameEn;
   String? img;
-  int? countryId;
+  var countryId;
   String? countryName;
   String? countryNameEn;
   String? createdAt;

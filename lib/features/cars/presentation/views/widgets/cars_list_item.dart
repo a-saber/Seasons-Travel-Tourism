@@ -30,6 +30,7 @@ class CarsListItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           elevation: 3,
           child: Container(
+            width: double.infinity,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(20)
@@ -52,33 +53,36 @@ class CarsListItem extends StatelessWidget {
                 const SizedBox(
                   height: 5,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        CacheData.lang == TranslationKeyManager.localeAR.toString()
-                            ? '${car.pricePerDay!}السعر في اليوم :  \$':
-                             'Price per day : ${car.pricePerDay!} \$',
-                        style: StyleManager.hotelItemTitle
-                            .copyWith(color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 12),
-                      ),
-                    ),
-                    SizedBox(width: 5,),
-                    if(inDetails)
-                    Expanded(
-                      child: Text(
-                        CacheData.lang == TranslationKeyManager.localeAR.toString()
-                            ? '${car.priceWithDriver!}السعر في اليوم مع سائق:  \$':
-                             'Price per day with driver: ${car.priceWithDriver!} \$',
-                        textAlign: TextAlign.end,
-                        style: StyleManager.hotelItemTitle
-                            .copyWith(color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 12),
-                      ),
-                    ),
-                  ],
+                Text(
+                  CacheData.lang == TranslationKeyManager.localeAR.toString()?
+                  car.carTypes!.name!: car.carTypes!.nameEn!,
+                  style: StyleManager.hotelItemExtraTitle.copyWith(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                      color: Colors.black,
+                      height: 1.5),
                 ),
+                Text(
+                  '${TranslationKeyManager.tax.tr} : ${car.tax!} \%',
+                  style: StyleManager.hotelItemTitle
+                      .copyWith(color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 12),
+                ),
+                Text(
+                  CacheData.lang == TranslationKeyManager.localeAR.toString()
+                      ? '${car.pricePerDay!}السعر في اليوم :  \$':
+                  'Price per day : ${car.pricePerDay!} \$',
+                  style: StyleManager.hotelItemTitle
+                      .copyWith(color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 12),
+                ),
+                if(inDetails)
+                  Text(
+                    CacheData.lang == TranslationKeyManager.localeAR.toString()
+                        ? '${car.priceWithDriver!}السعر في اليوم مع سائق:  \$':
+                    'Price per day with driver: ${car.priceWithDriver!} \$',
+                    textAlign: TextAlign.end,
+                    style: StyleManager.hotelItemTitle
+                        .copyWith(color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 12),
+                  ),
                 if(!inDetails)
                 Text(
                   TranslationKeyManager.bookNow.tr,

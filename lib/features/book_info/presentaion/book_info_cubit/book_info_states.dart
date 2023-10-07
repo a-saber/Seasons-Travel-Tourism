@@ -7,8 +7,8 @@ class GetBookLoadingState extends BookInfoStates {}
 
 class GetBookSuccessState extends BookInfoStates
 {
-  var data;
-  GetBookSuccessState(this.data);
+String url;
+GetBookSuccessState(this.url);
 }
 
 class GetBookErrorState extends BookInfoStates {

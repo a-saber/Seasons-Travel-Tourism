@@ -466,3 +466,371 @@ class _HotelsListItem2State extends State<HotelsListItem2> {
     );
   }
 }
+
+class HotelsListItem3 extends StatefulWidget {
+  const HotelsListItem3({Key? key, required this.hotel, required this.total, required this.startDateOfficial, required this.endDateOfficial}) : super(key: key);
+  final double total;
+  final HotelModel hotel;
+  final DateTime? startDateOfficial;
+  final DateTime? endDateOfficial;
+
+
+
+  @override
+  State<HotelsListItem3> createState() => _HotelsListItem3State();
+}
+
+class _HotelsListItem3State extends State<HotelsListItem3> {
+
+  bool hasSingle = false;
+  bool hasDouble = false;
+  bool hasTriple = false;
+  bool hasChildBed = false;
+  bool hasChildNoBed = false;
+  bool hasInfants = false;
+  @override
+  void initState() {
+
+    for(int i=0; i<HotelsCubit.get(context).roomsDataSearch.length;i++)
+    {
+      if(HotelsCubit.get(context).roomsDataSearch[i].adults==1)
+      {
+        hasSingle = true;
+      }
+      else if(HotelsCubit.get(context).roomsDataSearch[i].adults==2)
+      {
+        hasDouble = true;
+      }
+      else
+      {
+        hasTriple = true;
+      }
+      if(HotelsCubit.get(context).roomsDataSearch[i].kidsWithBed >0)
+      {
+        hasChildBed = true;
+      }
+      if(HotelsCubit.get(context).roomsDataSearch[i].kidsWithNoBed >0)
+      {
+        hasChildNoBed = true;
+      }
+      if(HotelsCubit.get(context).roomsDataSearch[i].infants >0)
+      {
+        hasInfants = true;
+      }
+    }
+
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      borderRadius: BorderRadius.circular(10),
+      elevation: 3,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Column(
+            children:
+            [
+              SizedBox(
+                // width: double.infinity,
+                // height: 150,
+                child: CachedNetworkImage(
+                  imageBuilder: (context, provider)=>
+                      Container(height: 200,width: double.infinity,decoration: BoxDecoration(image: DecorationImage(image: provider,fit: BoxFit.fill,),),),
+                  imageUrl:
+                  'https://api.seasonsge.com/images/${widget.hotel.mainImage}',
+                  placeholder: (context, error) =>
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 70.0),
+                        child: CircularProgressIndicator(),
+                      ),
+                  fit: BoxFit.fill,
+                  errorWidget: (context, url, error) =>
+                      Container(
+                        height: 200,width: double.infinity,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(AssetsManager.hotel),
+                            fit: BoxFit.fill,),),),
+                ),
+              ),
+              SizedBox(height: 5,),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: AlignmentDirectional.centerStart,
+                      child: Text(
+                        CacheData.lang == CacheHelperKeys.keyEN ?
+                        widget.hotel.nameEn! :
+                        widget.hotel.nameEn!,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 15),),
+                    ),
+                    Align(
+                      alignment: AlignmentDirectional.centerStart,
+                      child: Text(
+                        CacheData.lang == CacheHelperKeys.keyEN ?
+                        widget.hotel.cityModel!.nameEn! :
+                        widget.hotel.cityModel!.name! ,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 15),),
+                    ),
+                    Align(
+                      alignment: AlignmentDirectional.centerStart,
+                      child: Text(
+                        CacheData.lang == CacheHelperKeys.keyEN ?
+                        widget.hotel.detailsEn! :
+                        widget.hotel.details!,
+                        style: TextStyle(color: Colors.grey,
+                            fontWeight: FontWeight.bold, fontSize: 12),),
+                    ),
+                    Align(
+                      alignment: AlignmentDirectional.centerStart,
+                      child: Text(
+                        'Meal type : ${widget.hotel.hotelType!}' ,
+                        style: TextStyle(color: ColorsManager.primaryColor,
+                            fontWeight: FontWeight.bold, fontSize: 12),),
+                    ),
+                    SizedBox(height: 5,),
+                    Align(
+                      alignment: AlignmentDirectional.centerStart,
+                      child: Text('${widget.total} \$', style: TextStyle(color: Colors.redAccent,
+                          fontWeight: FontWeight.bold, fontSize: 20
+                      ),),
+                    ),
+                  ],
+                ),
+              ),
+              Text( CacheData.lang == CacheHelperKeys.keyEN ?
+              '${widget.endDateOfficial!.difference(widget.startDateOfficial!).inDays==0?1:widget.endDateOfficial!.difference(widget.startDateOfficial!).inDays} days':
+              '${widget.endDateOfficial!.difference(widget.startDateOfficial!).inDays==0?1:widget.endDateOfficial!.difference(widget.startDateOfficial!).inDays} ايام',
+                style: TextStyle(color: ColorsManager.primaryColor,
+                    fontWeight: FontWeight.bold, fontSize: 16
+                ),),
+              Text(
+                '${widget.endDateOfficial!.difference(widget.startDateOfficial!).inDays==0?DateFormat('dd/MM/yyyy').format(widget.startDateOfficial!):'${'${DateFormat('dd/MM/yyyy').format(widget.startDateOfficial!)}' ' : ' '${DateFormat('dd/MM/yyyy').format(widget.endDateOfficial!)}'}' }',
+                style: TextStyle(color: Colors.grey,
+                    fontWeight: FontWeight.bold, fontSize: 12
+                ),),
+              SizedBox(height: 10,),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Divider(),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Column(
+                  children:
+                  [
+                    Row(
+                      children:
+                      [
+                        Expanded(
+                          flex: 2,
+                          child:   Text(
+                            CacheData.lang==CacheHelperKeys.keyEN?'Tax':'الضريبة',
+                            style: TextStyle(
+                                fontSize: 16,
+                                height: 1.2,
+                                fontWeight:
+                                FontWeight.bold),
+                          ),
+                        ),
+                        Expanded(
+                            child: Center(
+                              child:  Text(
+                                '${widget.hotel.tax!} \%',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    height: 1.2,
+                                    color: Colors.red,
+                                    fontWeight:
+                                    FontWeight.bold),
+                              ),
+                            )
+                        ),
+                      ],
+                    ),
+                    if(hasSingle)
+                      Divider(),
+                    if(hasSingle)
+                      Row(
+                        children:
+                        [
+                          Expanded(
+                            flex: 2,
+                            child:   Text(
+                              CacheData.lang==CacheHelperKeys.keyEN?'Price for single room':'سعر غرفة لشخص',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  height: 1.2,
+                                  fontWeight:
+                                  FontWeight.bold),
+                            ),
+                          ),
+                          Expanded(
+                              child: Center(
+                                child:  Text(
+                                  '${widget.hotel.singlePrice} \$',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      height: 1.2,
+                                      color: Colors.red,
+                                      fontWeight:
+                                      FontWeight.bold),
+                                ),
+                              )
+                          ),
+                        ],
+                      ),
+
+                    if(hasDouble)
+                      Divider(),
+                    if(hasDouble)
+                      Row(
+                        children:
+                        [
+                          Expanded(
+                            flex: 2,
+                            child:   Text(
+                              CacheData.lang==CacheHelperKeys.keyEN?'Price for double room':'سعر غرفة لشخصين',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  height: 1.2,
+                                  fontWeight:
+                                  FontWeight.bold),
+                            ),
+                          ),
+                          Expanded(
+                              child: Center(
+                                child:  Text(
+                                  '${widget.hotel.doublePrice} \$',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      height: 1.2,
+                                      color: Colors.red,
+                                      fontWeight:
+                                      FontWeight.bold),
+                                ),
+                              )
+                          ),
+                        ],
+                      ),
+
+                    if(hasTriple)
+                      Divider(),
+                    if(hasTriple)
+                      Row(
+                        children:
+                        [
+                          Expanded(
+                            flex: 2,
+                            child:   Text(
+                              CacheData.lang==CacheHelperKeys.keyEN?'Price for triple room':'سعر غرفة لثلاثة اشخاص',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  height: 1.2,
+                                  fontWeight:
+                                  FontWeight.bold),
+                            ),
+                          ),
+                          Expanded(
+                              child: Center(
+                                child:  Text(
+                                  '${widget.hotel.triplePrice} \$',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      height: 1.2,
+                                      color: Colors.red,
+                                      fontWeight:
+                                      FontWeight.bold),
+                                ),
+                              )
+                          ),
+                        ],
+                      ),
+
+                    if(hasChildNoBed)
+                      Divider(),
+                    if(hasChildNoBed)
+                      Row(
+                        children:
+                        [
+                          Expanded(
+                            flex: 2,
+                            child:  Text(
+                              CacheData.lang==CacheHelperKeys.keyEN?'Price for a child without bed':'السعر لطفل بدون سرير',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  height: 1.2,
+                                  fontWeight:
+                                  FontWeight.bold),
+                            ),
+                          ),
+                          Expanded(
+                              child: Center(
+                                child:  Text(
+                                  '${widget.hotel.childNoBedPrice} \$',
+                                  style: TextStyle(
+                                      color: Colors.red,
+                                      fontSize: 16,
+                                      height: 1.2,
+                                      fontWeight:
+                                      FontWeight.bold),
+                                ),
+                              )
+                          ),
+                        ],
+                      ),
+
+                    if(hasChildBed)
+                      Divider(),
+                    if(hasChildBed)
+                      Row(
+                        children:
+                        [
+                          Expanded(
+                            flex: 2,
+                            child:  Text(
+                              CacheData.lang==CacheHelperKeys.keyEN?'Price for a child with bed':'السعر لطفل بسرير',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  height: 1.2,
+                                  fontWeight:
+                                  FontWeight.bold),
+                            ),
+                          ),
+                          Expanded(
+                              child: Center(
+                                child:  Text(
+                                  '${widget.hotel.childWithBedPrice} \$',
+                                  style: TextStyle(
+                                      color: Colors.red,
+                                      fontSize: 16,
+                                      height: 1.2,
+                                      fontWeight:
+                                      FontWeight.bold),
+                                ),
+                              )
+                          ),
+                        ],
+                      ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 10,),
+
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

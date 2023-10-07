@@ -1,3 +1,5 @@
+import 'city_model.dart';
+
 class GetHotelsModel {
   bool? success;
   List<HotelModel>? hotels;
@@ -29,6 +31,7 @@ class GetHotelsModel {
 class HotelModel {
   int? id;
   String? city;
+  HotelCityModel? cityModel;
   String? hotelType;
   String? rating;
   String? name;
@@ -66,6 +69,7 @@ class HotelModel {
         this.addressEn,
         this.mainImage,
         this.additionalImage,
+        this.cityModel,
         this.status});
 
   HotelModel.fromJson(Map<String, dynamic> json) {

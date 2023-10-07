@@ -11,6 +11,8 @@ import 'package:seasons/core/local_database/cache_helper_keys.dart';
 import 'package:seasons/core/localization/translation_key_manager.dart';
 import 'package:seasons/core/resources_manager/assets_manager.dart';
 import 'package:seasons/features/airports/cubit/airports_cubit.dart';
+import 'package:seasons/features/cars/data/models/cars_model.dart';
+import 'package:seasons/features/cars/presentation/views/car_passenger_data.dart';
 import 'package:seasons/features/cars/presentation/views/cars_search_view.dart';
 import 'package:seasons/features/flights/presentation/cubit/flights_cubit.dart';
 import 'package:seasons/features/flights/presentation/views/adult_number_view2.dart';
@@ -19,7 +21,9 @@ import 'package:seasons/features/home/cubit/home_cubit.dart';
 import 'package:seasons/features/home/cubit/home_states.dart';
 import 'package:seasons/features/home/data/slider_model.dart';
 import 'package:seasons/features/hotels/presentation/cubit/hotel_cubit/hotel_cubit.dart';
+import 'package:seasons/features/hotels/presentation/views/hotels_adult_number_view.dart';
 import 'package:seasons/features/programs_view/presentation/cubit/programs_cubit.dart';
+import 'package:seasons/features/programs_view/presentation/views/adult_number_view.dart';
 import 'package:seasons/features/sign_in/presentaion/cubit/login_cubit/login_cubit.dart';
 import 'package:seasons/features/sign_in/presentaion/cubit/login_cubit/login_states.dart';
 import 'package:seasons/features/train/presentation/train_cubit/train_cubit.dart';
@@ -287,16 +291,39 @@ class HomeBody extends StatelessWidget {
                                 ));
                                 break;
                               }
-                              case SliderTypes.program:
+                              case SliderTypes.car:
                               {
+                                CarsModel car = CarsModel(
+                                  id: SliderCubit.get(context).sliders[index].carModel!.id.toString(),
+                                  imagePath: SliderCubit.get(context).sliders[index].carModel!.imagePath,
+                                  pricePerDay: SliderCubit.get(context).sliders[index].carModel!.pricePerDay,
+                                  priceWithDriver: SliderCubit.get(context).sliders[index].carModel!.priceWithDriver,
+                                  status: SliderCubit.get(context).sliders[index].carModel!.status.toString(),
+                                  tax: SliderCubit.get(context).sliders[index].carModel!.tax,
+                                  typeId: SliderCubit.get(context).sliders[index].carModel!.typeId.toString(),
+                                  carTypes: SliderCubit.get(context).sliders[index].carModel!.carType
+                                );
+                                Get.to(()=> CarPassengerData2(
+                                  car: car,
+                                ));
                                 break;
                               }
                               case SliderTypes.hotel:
                               {
+                                Get.to(
+                                      () => HotelsAdultNumberView2(
+                                        hotelModel: SliderCubit.get(context).sliders[index].hotelModel,
+                                      roomsData: HotelsCubit.get(context).roomsDataSearch),
+                                );
                                 break;
                               }
-                              case SliderTypes.car:
+                              case SliderTypes.program:
                               {
+                                Get.to(
+                                      () => AdultNumberView3(
+                                      programModel: SliderCubit.get(context).sliders[index].programModel!,
+                                      roomsData: HotelsCubit.get(context).roomsDataSearch),
+                                );
                                 break;
                               }
                               default :

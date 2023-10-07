@@ -11,6 +11,7 @@ import 'package:seasons/features/cars/presentation/cubit/cars_cubit/cars_cubit.d
 import 'package:seasons/features/flights/presentation/cubit/flights_cubit.dart';
 import 'package:seasons/features/home/data/slider_model.dart';
 import 'package:seasons/features/hotels/presentation/cubit/hotel_cubit/hotel_cubit.dart';
+import 'package:seasons/features/programs_view/presentation/cubit/programs_cubit.dart';
 import 'package:seasons/features/settings/presentation/views/settings_view.dart';
 import 'package:seasons/features/sign_in/presentaion/views/profile_view.dart';
 
@@ -68,35 +69,26 @@ class SliderCubit extends Cubit<SliderStates> {
   Future getSlider(context) async {
     sliders = [];
     emit(SliderGetLoadingState());
-    try {
-      await DioHelper.getDate(url: '/get-slider').then((value) async
-      {
-        print(value.data.length);
-        getSliderDate(value, context).then((value)
-        {
-          print('-------');
-          print(sliders[0].flightModel==null);
-          emit(SliderGetSuccessState());
-        }).catchError((error)
-        {
-          emit(SliderGetErrorState(error.toString()));
-        });
-      }).catchError((e) {
-        print('error get slider');
-        print(e.toString());
-        late String error;
-        if (e is DioError) {
-          error = ServerFailure
-              .fromDioError(e)
-              .errorMessage;
-        } else {
-          error = ServerFailure(e).errorMessage;
-        }
-        emit(SliderGetErrorState(error.toString()));
-      });
-    }catch(e)
+    try
     {
-      emit(SliderGetErrorState(e.toString()));
+      var sliderResponse = await DioHelper.getDate(url: '/get-slider');
+      await getSliderDate(sliderResponse, context);
+      emit(SliderGetSuccessState());
+    }
+    catch(e)
+    {
+      print('error get slider');
+      print(e.toString());
+      late String error;
+      if (e is DioError)
+      {
+        error = ServerFailure.fromDioError(e).errorMessage;
+      }
+      else
+      {
+        error = ServerFailure(e.toString()).errorMessage;
+      }
+      emit(SliderGetErrorState(error.toString()));
     }
   }
 
@@ -104,6 +96,7 @@ class SliderCubit extends Cubit<SliderStates> {
   {
     for(int i =0;i<value.data.length;i++)
     {
+      print(value.data[i]);
       SliderModel sliderModel = SliderModel.fromJson(value.data[i]);
       if(sliderModel.link == null) continue;
       try {
@@ -112,38 +105,42 @@ class SliderCubit extends Cubit<SliderStates> {
         if(link[0] == 'car')
         {
           sliderModel.sliderType = SliderTypes.car;
-          await CarsCubit.get(context).getCarById(link[1]).then((value)
+          var car = await CarsCubit.get(context).getCarById(link[1]);
+          if(car != null)
           {
-            sliderModel.carModel = value;
+            sliderModel.carModel = car;
             sliders.add(sliderModel);
-          });
+          }
         }
         else if(link[0] == 'flight')
         {
           sliderModel.sliderType = SliderTypes.flight;
-          await FlightsCubit.get(context).getFlightByID(link[1]).then((value)
+          var flight = await FlightsCubit.get(context).getFlightByID(link[1]);
+          if(flight != null)
           {
-            sliderModel.flightModel = value;
+            sliderModel.flightModel = flight;
             sliders.add(sliderModel);
-          });
+          }
         }
         else if(link[0] == 'hotel')
         {
           sliderModel.sliderType = SliderTypes.hotel;
-          await HotelsCubit.get(context).getHotelByID(link[1]).then((value)
+          var hotel = await HotelsCubit.get(context).getHotelByID(link[1]);
+          if(hotel != null)
           {
-            sliderModel.hotelModel = value;
+            sliderModel.hotelModel = hotel;
             sliders.add(sliderModel);
-          });
+          }
         }
         else if(link[0] == 'program')
         {
           sliderModel.sliderType = SliderTypes.program;
-          // sliderModel.hotelModel = await HotelsCubit.get(context).getHotelByID(link[1]).then((value)
-          // {
-          //   sliderModel.hotelModel = value;
-          //   sliders.add(sliderModel);
-          // });
+          var program = await ProgramsCubit.get(context).getProgramById(link[1]);
+          if(program != null)
+          {
+            sliderModel.programModel = program;
+            sliders.add(sliderModel);
+          }
         }
       }catch(e)
       {

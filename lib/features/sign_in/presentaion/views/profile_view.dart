@@ -12,6 +12,8 @@ import 'package:seasons/core/local_database/cache_helper_keys.dart';
 import 'package:seasons/core/resources_manager/assets_manager.dart';
 import 'package:seasons/core/resources_manager/colors_manager.dart';
 import 'package:seasons/core/resources_manager/style_manager.dart';
+import 'package:seasons/features/Archives/cubit/archives_cubit.dart';
+import 'package:seasons/features/Archives/presentation/views/archives_view.dart';
 import 'package:seasons/features/home/cubit/home_cubit.dart';
 import 'package:seasons/features/sign_in/data/models/user_model.dart';
 import 'package:seasons/features/sign_in/presentaion/cubit/login_cubit/login_cubit.dart';
@@ -200,7 +202,28 @@ class _ProfileViewState extends State<ProfileView> {
                       SizedBox(
                           height:40
                       ),
-                      SizedBox(height: 30,),
+                      InkWell(
+                        onTap: () async
+                        {
+                          ArchivesCubit.get(context).getArchives(LoginCubit.get(context).userModel!.id.toString(), LoginCubit.get(context).userModel!.type ==1 );
+                          Get.to(()=>ArchivesView());
+                        },
+                        child: Container(
+                          height: 40,
+                          margin: const EdgeInsets.symmetric(horizontal: 40.0),
+                          decoration: BoxDecoration(
+                            color: ColorsManager.primaryColor,
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: Center(
+                            child: Text(
+                              CacheData.lang == CacheHelperKeys.keyEN? 'Archives':'الارشيف',
+                              style: StyleManager.searchTextStyle.copyWith(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 10,),
 
                     ],
                   ),
@@ -211,7 +234,22 @@ class _ProfileViewState extends State<ProfileView> {
         )
       ],
     );
-    return Scaffold(
+
+  }
+}
+
+/*
+gradient: LinearGradient(
+                                    colors:
+                                    [
+                                      ColorsManager.primaryColor,
+                                      Color(0xff604fb4),
+                                    ]),
+ */
+
+
+/*
+return Scaffold(
       key: scaffoldKey,
       backgroundColor: ColorsManager.primaryColor,
       appBar: defaultAppBar(context: context, text: 'Profile',action: IconButton(
@@ -395,14 +433,4 @@ class _ProfileViewState extends State<ProfileView> {
           )
       ),
     );
-  }
-}
-
-/*
-gradient: LinearGradient(
-                                    colors:
-                                    [
-                                      ColorsManager.primaryColor,
-                                      Color(0xff604fb4),
-                                    ]),
  */
