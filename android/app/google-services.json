@@ -1,32 +1,13 @@
 {
   "project_info": {
-    "project_number": "527768456077",
-    "project_id": "quickly-a9335",
-    "storage_bucket": "quickly-a9335.appspot.com"
+    "project_number": "826062292369",
+    "project_id": "season-faa87",
+    "storage_bucket": "season-faa87.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:527768456077:android:959b8aaa49125c47880bc4",
-        "android_client_info": {
-          "package_name": "com.example.quickly_app"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAGe8G3Zrm2TofNPRkuvcTaZfGItatmQOs"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:527768456077:android:e2dd2296bc887314880bc4",
+        "mobilesdk_app_id": "1:826062292369:android:1fb9fdc25a18e27d2a4630",
         "android_client_info": {
           "package_name": "com.example.seasons"
         }
@@ -34,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAGe8G3Zrm2TofNPRkuvcTaZfGItatmQOs"
+          "current_key": "AIzaSyC-lsisnnuWwCyQe_WZKDAjO4mmf_JjmQQ"
         }
       ],
       "services": {

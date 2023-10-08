@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:seasons/core/core_widgets/basic_view.dart';
 import 'package:seasons/core/core_widgets/default_app_bar.dart';
@@ -90,6 +91,12 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                   ),
                 ),
+                SizedBox(height: 10,),
+                IconButton(
+                    onPressed: ()
+                    {
+                      LoginCubit.get(context).loginGoogle(context: context);
+                    }, icon: FaIcon(FontAwesomeIcons.google)),
                 SizedBox(height: 10,),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),

@@ -75,6 +75,8 @@ dependencies:
   permission_handler: ^11.0.0
   http:
   pdf: ^3.1.0
+  google_sign_in:
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

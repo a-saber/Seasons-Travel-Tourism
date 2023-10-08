@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:seasons/core/dio_helper/end_points.dart';
 import 'package:seasons/features/cars/data/models/book_model.dart';
 import 'package:seasons/features/cars/data/models/cars_model.dart';
+import 'package:seasons/features/cars/presentation/cubit/cars_cubit/cars_cubit.dart';
 
 import '../../../../core/dio_helper/dio_helper.dart';
 import '../../../../core/errors/failures.dart';
@@ -37,7 +38,7 @@ class CarRepoImplementation extends CarRepo {
   }
 
   @override
-  Future<Either<Failure, List<CarsModel>>> getAllCars() async {
+  Future<Either<Failure, List<CarsModel>>> getAllCars(context) async {
     try {
       var data = await DioHelper.getDate(
         url: EndPoints.ALLCARS,
@@ -45,8 +46,9 @@ class CarRepoImplementation extends CarRepo {
       print("all carsssssssssssssssssssssss");
       print(data.data.toString());
       List<CarsModel> cars = [];
-      data.data.forEach((element) {
-        cars.add(CarsModel.fromJson(element));
+      await data.data.forEach((element) async{
+        CarsModel car = CarsModel.fromJson(element);
+        cars.add(car);
       });
       return right(cars);
     } catch (e) {

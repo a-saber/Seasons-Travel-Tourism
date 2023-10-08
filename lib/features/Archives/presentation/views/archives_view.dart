@@ -123,16 +123,17 @@ class _ArchivesViewState extends State<ArchivesView> {
                             InkWell(
                               onTap: ()
                               {
+                                print('----------');
                                 String url;
-                                if(index==0)
+                                if(ArchivesCubit.get(context).currentIndex==0)
                                 {
                                   url = 'flights';
                                 }
-                                else if(index==1)
+                                else if(ArchivesCubit.get(context).currentIndex==1)
                                 {
                                   url = 'programs';
                                 }
-                                else if(index==2)
+                                else if(ArchivesCubit.get(context).currentIndex==2)
                                 {
                                   url = 'hotels';
                                 }
@@ -146,6 +147,7 @@ class _ArchivesViewState extends State<ArchivesView> {
                                   url = 'agent-${url}';
                                   agent ='/3';
                                 }
+                                print('object');
                                 print(url);
                                 print('${url}-checkout/${ArchivesCubit
                                     .get(context)

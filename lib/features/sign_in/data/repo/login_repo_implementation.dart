@@ -36,16 +36,6 @@ class LoginRepoImplementation extends LoginRepo {
   Future<Either<Failure, RegisterResponse>> register({required UserModel userModel, required String? filePath,
     required String? name,}) async {
     try {
-      // Map<String, dynamic> userJson ={
-      //   "id": userModel.id,
-      //   "name": userModel.name,
-      //   "email": userModel.email,
-      //   "password": userModel.password,
-      //   "type": userModel.type,
-      //   "discount": userModel.discount,
-      //   "balance": userModel.balance,
-      //   "img": await MultipartFile.fromFile(filePath!, filename: name),
-      // };
       var data = await DioHelper.register( name: name, filePath: filePath, user: userModel);
       print(data.data!.toString());
       RegisterResponse registerResponse = RegisterResponse.fromJson(data.data);

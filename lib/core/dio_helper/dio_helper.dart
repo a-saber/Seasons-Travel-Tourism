@@ -74,6 +74,7 @@ class DioHelper {
         "type": user.type,
         "discount": user.discount,
         "balance": user.balance,
+        'token':user.token??'',
         "img": await MultipartFile.fromFile(filePath, filename: name),
       });
     }
@@ -108,10 +109,11 @@ class DioHelper {
       formData=FormData.fromMap({
         "name": user.name,
         "email": user.email,
-        "password": user.password,
+        "password": user.password??'',
         "type": 0,
         "discount": 0,
         "balance": 0,
+        'token':user.token??'',
         "img": await MultipartFile.fromFile(filePath, filename: name),
       });
     }

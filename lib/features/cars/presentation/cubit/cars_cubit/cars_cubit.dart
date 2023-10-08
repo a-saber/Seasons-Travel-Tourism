@@ -19,14 +19,16 @@ class CarsCubit extends Cubit<CarsStates> {
   Future<void> getCars(context) async {
     cars = [];
     emit(GetAllCarsLoadingState());
-    var response = await carsRepoImplementation.getAllCars();
-
+    var response = await carsRepoImplementation.getAllCars(context);
     response.fold((failure) {
       emit(GetAllCarsErrorState(failure.errorMessage));
       showToast(state: ToastState.ERROR, massage: failure.errorMessage);
-    }, (result) {
+    }, (result) async{
       cars = result;
-
+      for(int i=0; i<result.length;i++)
+      {
+        result[i].carTypes= await CarsCubit.get(context).getCarTypeById(result[i].typeId!);
+      }
       emit(GetAllCarsSuccessState(result));
       //showToast(state: ToastState.SUCCESS, massage: "Get Cars Successfully");
     });

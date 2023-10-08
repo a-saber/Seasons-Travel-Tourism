@@ -7,7 +7,7 @@ import '../models/car_types.dart';
 
 abstract class CarRepo {
   Future<Either<Failure, List<CarTypes>>> getAllCarTypes();
-  Future<Either<Failure, List<CarsModel>>> getAllCars();
+  Future<Either<Failure, List<CarsModel>>> getAllCars(context);
   Future<Either<Failure, BookModel>> BookCar({
     required String typedId,
     required String driver,

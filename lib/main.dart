@@ -62,22 +62,10 @@ void main() async {
   await DioHelper.init();
   await CacheHelper.init();
   setupForgotPassSingleton();
-  // if (!kIsWeb &&
-  //     kDebugMode &&
-  //     defaultTargetPlatform == TargetPlatform.android) {
-  //   await InAppWebViewController.setWebContentsDebuggingEnabled(kDebugMode);
-  // }
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
-  // Plugin must be initialized before using
-  // await FlutterDownloader.initialize(
-  //     debug: true,
-  //     // optional: set to false to disable printing logs to console (default: true)
-  //     ignoreSsl:
-  //     true // option: set to false to disable working with http links (default: false)
-  // );
-  // await Firebase.initializeApp(
-  //   options: DefaultFirebaseOptions.currentPlatform,
-  // );
   // FirebaseMessaging.instance;
   // FirebaseMessaging.onBackgroundMessage(onBackground);
   // FirebaseMessaging.instance.getToken().then((value) {

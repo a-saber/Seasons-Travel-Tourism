@@ -267,6 +267,9 @@ class FlightBuilder2 extends StatelessWidget {
 
           double total = net+(net* double.parse(flightModel.tax!)/100);
 
+          print('object');
+          print(flightModel.allowReturn.toString());
+          print(flightModel.allowReturn.toString()=='1');
           return InkWell(
             onTap: !enabled?null:() {
               Get.to(() => FlightPassengerData(
@@ -547,7 +550,7 @@ class FlightBuilder2 extends StatelessWidget {
                     ],
                   ),
 
-                  if(flightModel.allowReturn==1)
+                  if(flightModel.allowReturn.toString()=='1')
                     Column(
                       children: [
                         Divider(),

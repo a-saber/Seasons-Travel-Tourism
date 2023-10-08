@@ -56,12 +56,12 @@ class RegisterResponse {
 }
 
 class UserModel {
-  int? id;
+  var id;
   String? name;
   String? email;
   String? emailVerifiedAt;
   String? password;
-  int? type;
+  var type;
   String? discount;
   String? balance;
   String? img;
@@ -70,6 +70,7 @@ class UserModel {
   String? updatedAt;
   String? verificationCode;
   String? gender;
+  String? token;
 
   UserModel(
       {this.id,
@@ -85,6 +86,7 @@ class UserModel {
       this.createdAt,
       this.updatedAt,
       this.verificationCode,
+      this.token,
       this.gender});
 
   UserModel.fromJson(Map<String, dynamic> json) {
@@ -102,6 +104,7 @@ class UserModel {
     updatedAt = json['updated_at'];
     verificationCode = json['verification_code'];
     gender = json['gender'];
+    token = json['token'];
   }
 
   Map<String, dynamic> toJson() {
@@ -120,6 +123,7 @@ class UserModel {
     data['updated_at'] = this.updatedAt;
     data['verification_code'] = this.verificationCode;
     data['gender'] = this.gender;
+    data['token'] = this.token??'';
     return data;
   }
 }

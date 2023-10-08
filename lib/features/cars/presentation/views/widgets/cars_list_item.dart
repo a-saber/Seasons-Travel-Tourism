@@ -55,7 +55,7 @@ class CarsListItem extends StatelessWidget {
                 ),
                 Text(
                   CacheData.lang == TranslationKeyManager.localeAR.toString()?
-                  car.carTypes!.name!: car.carTypes!.nameEn!,
+                  car.carTypes!.name??'': car.carTypes!.nameEn??'',
                   style: StyleManager.hotelItemExtraTitle.copyWith(
                       fontWeight: FontWeight.bold,
                       fontSize: 15,

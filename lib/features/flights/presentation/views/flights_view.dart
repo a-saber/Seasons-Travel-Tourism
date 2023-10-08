@@ -2176,14 +2176,16 @@ class BottomSheetListBuilder extends StatelessWidget {
                             SizedBox(
                               width: 10,
                             ),
-                            Text(
-                              CacheData.lang == CacheHelperKeys.keyEN?
-                              models[index].englishName!:
-                              models[index].arabicName!,
-                              style: TextStyle(
-                                  fontWeight:
-                                  FontWeight.bold,
-                                  color: Colors.black),
+                            Expanded(
+                              child: Text(
+                                CacheData.lang == CacheHelperKeys.keyEN?
+                                models[index].englishName!:
+                                models[index].arabicName!,
+                                style: TextStyle(
+                                    fontWeight:
+                                    FontWeight.bold,
+                                    color: Colors.black),
+                              ),
                             ),
                           ],
                         ),
